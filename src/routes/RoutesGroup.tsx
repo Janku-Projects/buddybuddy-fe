@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 
-import Intro from "@/pages/Home";
+import Home from "@/pages/Home";
 const RoutesGroup = () => {
 
     const isAuthenticated = () => {
@@ -9,7 +9,7 @@ const RoutesGroup = () => {
 
     return (
         <Routes>
-            <Route path={"/"} element={<Intro />}/>
+            <Route path={"/"} element={<Home />}/>
             {/*<Route path={"/login"} element={<Login/>}/>*/}
 
         </Routes>

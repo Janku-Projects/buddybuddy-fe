@@ -1,7 +1,7 @@
-const Intro = () => {
+const Home = () => {
     return (
         <>Hello</>
     )
 }
 
-export default Intro;
+export default Home;
