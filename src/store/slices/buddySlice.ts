@@ -5,7 +5,9 @@ interface iBuddySlice {
 }
 
 const initState: iBuddySlice = {
-
+    name: "dummy",
+    createdDate: "",
+    lastLoginInDate: ""
 };
 
 const buddySlice = createSlice({

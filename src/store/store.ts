@@ -11,7 +11,7 @@ import rootSaga from './root/rootSaga'; // Combine all sagas here
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: [], // Add reducer keys to persist, e.g., ['auth']
+    whitelist: [],
 };
 
 // Create Saga Middleware

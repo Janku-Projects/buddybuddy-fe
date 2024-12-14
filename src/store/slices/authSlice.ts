@@ -6,10 +6,11 @@ interface iAuthSlice {
     lastLoginInDate: string;
 }
 
+// Initial state for the slice
 const initState: iAuthSlice = {
-    name: "dummy",
+    name: "",
     createdDate: "",
-    lastLoginInDate: ""
+    lastLoginInDate: "",
 };
 
 const authSlice = createSlice({
@@ -17,13 +18,18 @@ const authSlice = createSlice({
     initialState: initState,
     reducers: {
         setAuth: (state, action: PayloadAction<iAuthSlice>) => {
-            state = { ...action };
+            // Update state fields with the payload data
+            console.log("act::: ", action);
+            state = action.payload
+        },
+        setLastLogin: (state, action: PayloadAction<string>) => {
+            state.lastLoginInDate = action.payload;
         }
-    }
-
+    },
 });
 
-// export actions
-export const { setAuth } = authSlice.actions;
-// export reducers
-export default authSlice;
+// Export actions
+export const { setAuth, setLastLogin } = authSlice.actions;
+
+// Export reducer
+export default authSlice.reducer;

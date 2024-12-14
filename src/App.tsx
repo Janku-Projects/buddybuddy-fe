@@ -5,7 +5,7 @@ import { SnackbarProvider } from 'notistack';
 
 import { theme } from "./styles/theme";
 import { Provider } from "react-redux";
-import { store, persistor } from "./store/store";
+import { store, persistor} from "@/store/store";
 import { PersistGate } from "redux-persist/integration/react";
 import GlobalStyles from "./styles/globalStyles";
 import Layout from "./layouts/Layout";
