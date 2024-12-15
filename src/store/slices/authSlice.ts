@@ -1,30 +1,39 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface iAuthSlice {
+interface UserData {
     name: string;
     createdDate: string;
     lastLoginInDate: string;
 }
 
+interface iAuthSlice {
+    isLoggedIn: boolean;
+    userData: UserData;
+}
+
 // Initial state for the slice
 const initState: iAuthSlice = {
-    name: "",
-    createdDate: "",
-    lastLoginInDate: "",
+    isLoggedIn: false,
+    userData: {
+        name: "",
+        createdDate: "",
+        lastLoginInDate: "",
+    },
 };
 
 const authSlice = createSlice({
     name: "auth",
     initialState: initState,
     reducers: {
-        setAuth: (state, action: PayloadAction<iAuthSlice>) => {
-            // Update state fields with the payload data
-            console.log("act::: ", action);
-            state = action.payload
+        setAuth: (state, action: PayloadAction<UserData>) => {
+            state.userData = action.payload;
+            state.isLoggedIn = true;
         },
+
         setLastLogin: (state, action: PayloadAction<string>) => {
-            state.lastLoginInDate = action.payload;
-        }
+            state.userData.lastLoginInDate = action.payload;
+            state.isLoggedIn = true;
+        },
     },
 });
 

@@ -3,7 +3,8 @@ import authSlice from "@/store/slices/authSlice";
 
 
 const rootReducer = combineReducers({
-    auth: authSlice
+    auth: authSlice,
+
 });
 
 export default rootReducer;
