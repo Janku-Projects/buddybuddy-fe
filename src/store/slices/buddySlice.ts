@@ -1,27 +1,28 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface iBuddySlice {
-
+    data: any;
+    buddy: any;
 }
 
 const initState: iBuddySlice = {
-    name: "dummy",
-    createdDate: "",
-    lastLoginInDate: ""
+    data: null,
+    buddy: null
 };
 
 const buddySlice = createSlice({
     name: "buddy",
     initialState: initState,
     reducers: {
-        setAuth: (state, action: PayloadAction<iBuddySlice>) => {
-            state = { ...action };
+        setBuddy: (state, action: PayloadAction<iBuddySlice>) => {
+            state.data = action.payload.data;
+            state.buddy = action.payload.buddy;
         }
     }
 
 });
-//
-// // export actions
-// export const { setAuth } = buddySlice.actions;
-// // export reducers
-// export default buddySlice;
+
+// export actions
+export const { setBuddy } = buddySlice.actions;
+// export reducers
+export default buddySlice.reducer;
