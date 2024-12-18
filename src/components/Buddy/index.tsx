@@ -1,24 +1,27 @@
-import { FC } from "react";
+import { FC, Suspense } from "react";
 import { BuddyWrapper } from "@/components/Buddy/Buddy.styled";
 import { Canvas } from "@react-three/fiber";
 
-import LightController from "@/components/Model/LightController";
-import OrbitController from "@/components/Model/OrbitController";
+import LightController from "@/components/Three/LightController";
+import OrbitController from "@/components/Three/OrbitController";
+import { Loader } from "@react-three/drei";
+import Model from "@/components/Three/Model";
+import Three from "@/components/Three";
 
 interface iBuddy {
+    // fileName: string;
+    // isShowLabel?: false;
+    // level?: number;
+    // name ?: string;
 
 }
 
-const Buddy: FC<any> = ({ fileName, isComponent = false, isShowLabel = true, level = 1, name = "" }) => {
+const Buddy: FC<any> = ({ fileName = 'chicken_lv_1', isShowLabel = true, level = 1, name = "" }) => {
 
 
     return (
         <BuddyWrapper>
-            <Canvas camera={{ position: [0, 0, 3], fov: isComponent ? 15 : 30 }}>
-
-                <LightController/>
-                <OrbitController/>
-            </Canvas>
+            <Three fileName={fileName}/>
         </BuddyWrapper>
     );
 };
