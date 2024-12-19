@@ -8,13 +8,25 @@ import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
 
 const Model = ({ fileName }) => {
 	// const obj = useLoader(OBJLoader, `models/chicken_lv_1.obj`);
-	const obj = useLoader(OBJLoader, `models/${fileName}.obj`);
-
-	const [isReady, setIsReady] = useState(false);
+	const obj = useLoader(OBJLoader, `models/${ fileName }.obj`);
 	const ref = useRef();
-	const [rotation, setRotation] = useState(0);
 	const [isDragging, setIsDragging] = useState(false);
+	const [rotationX, setRotationX] = useState(0); // X-axis rotation
+	const [rotationY, setRotationY] = useState(0); // Y-axis rotation (previously just "rotation")
+	const animationFrameId = useRef(null); // To store the animation frame ID
 
+	useEffect(() => {
+		if (ref.current) {
+			const box = new THREE.Box3().setFromObject(ref.current); // Bounding box
+			const center = new THREE.Vector3();
+			box.getCenter(center);
+			ref.current.position.sub(center); // Center the model at (0, 0, 0)
+
+			// Apply both rotations
+			ref.current.rotation.y = THREE.MathUtils.degToRad(rotationY); // Yaw
+			ref.current.rotation.x = THREE.MathUtils.degToRad(rotationX); // Pitch
+		}
+	}, [obj, rotationX, rotationY]);
 	useLayoutEffect(() => {
 		obj.traverse((child) => { // 자식 요소를 순회하는 함수
 			if (child?.isMesh) { // 메시(mesh) 객체를 식별 > "겉면"을 구성하는 기본 단위
@@ -33,47 +45,67 @@ const Model = ({ fileName }) => {
 			}
 		});
 	}, [obj, fileName]);
-
-	// SECT:: 모델이 씬(Scene)의 원점에 정렬.
 	useEffect(() => {
-		if (ref.current) {
-			const box = new THREE.Box3().setFromObject(ref.current); // 3D 객체의 Bounding Box를 계산
-			const center = new THREE.Vector3();
-			box.getCenter(center); // 델의 중심 좌표를 계산
-			ref.current.position.sub(center); // 중심을 (0, 0, 0)으로 이동
-			ref.current.rotation.y = THREE.MathUtils.degToRad(rotation);
+		if (isDragging) {
+			cancelAnimationFrame(animationFrameId.current);
+			animationFrameId.current = null;
+		} else {
+			const targetX = 0;
+			const targetY = 0;
+			const animateReturn = () => {
+				setRotationX((prevX) => {
+					const newX = prevX + ( targetX - prevX ) * 0.1; // Smooth interpolation
+					if (Math.abs(newX - targetX) < 0.01) return targetX; // Stop when close enough
+					return newX;
+				});
+
+				setRotationY((prevY) => {
+					const newY = prevY + ( targetY - prevY ) * 0.1; // Smooth interpolation
+					if (Math.abs(newY - targetY) < 0.01) return targetY; // Stop when close enough
+					return newY;
+				});
+
+				// Check if animation should continue
+				if (
+					Math.abs(rotationX - targetX) > 0.01 ||
+					Math.abs(rotationY - targetY) > 0.01
+				) {
+					animationFrameId.current = requestAnimationFrame(animateReturn);
+				}
+			};
+			animationFrameId.current = requestAnimationFrame(animateReturn);
 		}
-	}, [obj, rotation]);
+	}, [isDragging]);
 
 
-	const handlePointerDown = (payload) => {
-		console.log("payload check:: ", payload);
+	const handlePointerMove = (event) => {
+		if (isDragging) {
+			const deltaX = event.movementX * 0.2;
+			const deltaY = event.movementY * 0.2;
 
-	};
-
-	const handlePointerMove = (payload) => {
-		console.log("payload check:: ", payload);
-
-	};
-
-	const handlePointerUp = (payload) => {
-		console.log("payload check:: ", payload);
-	};
-
-	const handlePointerLeave = (payload) => {
-		console.log("payload check:: ", payload);
+			setRotationY((prev) => ( prev + deltaX ) % 360); // Yaw
+			setRotationX((prev) => Math.max(-90, Math.min(90, prev + deltaY))); // Pitch
+		}
 	};
 
 
-	return ( <group
-		ref={ ref }
-		onPointerDown={ handlePointerDown }
-		onPointerMove={ handlePointerMove }
-		onPointerUp={ handlePointerUp }
-		onPointerLeave={ handlePointerLeave }
-	>
-		<primitive object={ obj }/>
-	</group> );
+	return (
+		<>
+			<group
+				rotation={ [
+					THREE.MathUtils.degToRad(rotationX),
+					THREE.MathUtils.degToRad(rotationY),
+					0,
+				] }
+				onPointerDown={ () => setIsDragging(true) }
+				onPointerUp={ () => setIsDragging(false) }
+				onPointerLeave={ () => setIsDragging(false) }
+				onPointerMove={ handlePointerMove }
+			>
+				<primitive object={ obj }/>
+			</group>
+		</>
+	);
 
 };
 
