@@ -3,7 +3,8 @@ import { BuddyWrapper } from "@/components/Buddy/Buddy.styled";
 
 
 import Three from "@/components/Three";
-import Label from "@/components/Label";
+import InfoLabel from "src/components/InfoLabel";
+import ActionLabel from "@/components/ActionLabel";
 
 
 const Buddy: FC<any> = ({ fileName = 'chicken_lv_1', isShowLabel = true, level = 1, name = "" }) => {
@@ -11,8 +12,9 @@ const Buddy: FC<any> = ({ fileName = 'chicken_lv_1', isShowLabel = true, level =
 
     return (
         <BuddyWrapper>
-            <Label style={{ }}/>
+            <ActionLabel />
             <Three fileName={fileName}/>
+            <InfoLabel style={{ }}/>
         </BuddyWrapper>
     );
 };

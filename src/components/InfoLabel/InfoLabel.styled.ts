@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { theme } from "@/styles/theme";
 
-export const LabelBox = styled.div`
+export const InfoLabelBox = styled.div`
     width: 100%;
     position: absolute;
     bottom: 50px;
