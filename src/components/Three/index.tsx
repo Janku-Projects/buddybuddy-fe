@@ -11,9 +11,7 @@ interface iThree {
 
 const Three: FC<iThree> = ({ fileName }) => {
     return (
-        <Canvas camera={{ position: [0, 0, 3], fov: 30 }}>
-
-
+        <Canvas camera={{ position: [0, 0, 3], fov: 60 }}>
             <LightController/>
             <OrbitController/>
             <Model fileName={fileName}/>
