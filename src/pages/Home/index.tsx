@@ -1,6 +1,6 @@
-import { useEffect } from "react";
 import HomeHandler from "@/pages/Home/Home.func";
 import Buddy from "@/components/Buddy";
+import { ActionNav } from "@/components/ActionNav";
 
 
 const Home = () => {
@@ -13,7 +13,10 @@ const Home = () => {
         <>
             {
                 isReady && (
-                    <Buddy/>
+                    <>
+                        <Buddy/>
+                        <ActionNav style={{zIndex: 100}}/>
+                    </>
                 )
 
             }</>

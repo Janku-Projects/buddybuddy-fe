@@ -1,21 +1,17 @@
-import { FC, Suspense } from "react";
+import { FC } from "react";
 import { BuddyWrapper } from "@/components/Buddy/Buddy.styled";
-
-
 import Three from "@/components/Three";
 import InfoLabel from "src/components/InfoLabel";
-import ActionLabel from "src/components/StatusLabel";
-import { ActionNav } from "@/components/ActionNav";
+import StatusLabel from "src/components/StatusLabel";
 
 
 const Buddy: FC<any> = ({ fileName = 'chicken_lv_1', isShowLabel = true, level = 1, name = "" }) => {
 
-
     return (
         <BuddyWrapper>
-            <ActionLabel />
-            <Three fileName={fileName}/>
-            <InfoLabel style={{ }}/>
+            <StatusLabel/>
+            <Three fileName={fileName} style={{ height: '600px' }}/>
+            <InfoLabel/>
         </BuddyWrapper>
     );
 };

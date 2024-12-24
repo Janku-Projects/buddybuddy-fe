@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const StatusLabelBox = styled.div`
     width: 100%;
     position: absolute;
-    top: 50px;
+    top: 0px;
     display: flex;
     align-items: center;
     justify-content: center;

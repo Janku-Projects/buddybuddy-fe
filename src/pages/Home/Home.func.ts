@@ -19,7 +19,7 @@ const HomeHandler = () => {
         if (!buddy.data || !buddy.buddy) {
             const buddy = getBuddy();
         }
-        dispatch(setHeader("Home Page")); // 헤더 확인
+        dispatch(setHeader("메인페이지")); // 헤더 확인
         setReady(true); // 화면 준비
     }, []);
 

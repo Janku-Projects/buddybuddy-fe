@@ -9,7 +9,7 @@ interface iActionLabelProps extends generalInterface {
 
 }
 
-const ActionLabel: FC<iActionLabelProps> = ({ style }) => {
+const StatusLabel: FC<iActionLabelProps> = ({ style }) => {
     return (
         <StatusLabelBox>
             <GaugeArea>
@@ -22,4 +22,4 @@ const ActionLabel: FC<iActionLabelProps> = ({ style }) => {
 };
 
 
-export default ActionLabel;
+export default StatusLabel;
