@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ActionLabelBox = styled.div`
+export const StatusLabelBox = styled.div`
     width: 100%;
     position: absolute;
     top: 50px;
@@ -10,8 +10,6 @@ export const ActionLabelBox = styled.div`
     gap: 0.6rem;
     
 `;
-
-
 export const GaugeArea = styled.div`
     background-color: ${({ theme }) => theme.colors.white};
     padding: 1rem;
