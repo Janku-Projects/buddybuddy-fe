@@ -1,33 +1,25 @@
 import { Box, Container } from "@/components/ActionNav/ActionNav.styled";
 import { generalInterface } from "@/Util/util";
 import { FC } from "react";
-import Icon from "@/components/common/Icon";
+import Icon from "@/components/Common/Icon";
 
 
 interface iActionNavProps extends generalInterface {
-
+    actionList: any[]
 }
 
-export const ActionNav: FC<iActionNavProps> = ({}) => {
+export const ActionNav: FC<iActionNavProps> = ({actionList}) => {
 
     return (
         <Container>
-            <Box onClick={() => {}}>
-                <Icon width={30} height={30} icon="LiftingWeights" />
-                운동
-            </Box>
-            <Box onClick={() => {}}>
-                <Icon width={30} height={30} icon="Bathtub" />
-                샤워
-            </Box>
-            <Box onClick={() => {}}>
-                        <Icon width={30} height={30} icon="Bad" />
-                잠자기
-            </Box>
-            <Box onClick={() => {}}>
-                <Icon width={30} height={30} icon="ThoughtBalloon" />
-                대화
-            </Box>
+            {
+                actionList.map((action) =>(
+                    <Box onClick={action.handlerAction} key={action.key}>
+                        <Icon width={action.width} height={action.height} icon={action.icon} />
+                        {action.label}
+                    </Box>
+                ))
+            }
         </Container>
     )
 }

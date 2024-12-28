@@ -1,5 +1,5 @@
 import { FC, SVGAttributes } from "react";
-import * as icons from "@/components/common/Icon/Icons.def";
+import * as icons from "@/components/Common/Icon/Icons.def";
 
 interface iIconProps extends SVGAttributes<SVGElement> {
     icon: keyof typeof icons;

@@ -9,8 +9,8 @@ const Buddy: FC<any> = ({ fileName = 'chicken_lv_1', isShowLabel = true, level =
 
     return (
         <BuddyWrapper>
-            <StatusLabel/>
-            <Three fileName={fileName} style={{ height: '600px' }}/>
+            {/*<StatusLabel/>*/}
+            <Three fileName={fileName} style={{ height: '550px' }}/>
             <InfoLabel/>
         </BuddyWrapper>
     );

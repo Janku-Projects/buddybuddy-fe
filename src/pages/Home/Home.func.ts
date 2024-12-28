@@ -14,6 +14,10 @@ const HomeHandler = () => {
         return payload;
     };
 
+
+
+
+
     // SECT: MOUNTED > Buddy check
     useEffect(() => {
         if (!buddy.data || !buddy.buddy) {
@@ -22,6 +26,8 @@ const HomeHandler = () => {
         dispatch(setHeader("메인페이지")); // 헤더 확인
         setReady(true); // 화면 준비
     }, []);
+
+
 
     return {
         isReady
