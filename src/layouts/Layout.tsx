@@ -19,9 +19,9 @@ const Layout = ({ children }: layoutProps) => {
             <Body>
                 {children}
             </Body>
-            <Footer>
-                Footer Section
-            </Footer>
+            {/*<Footer>*/}
+            {/*    Footer Section*/}
+            {/*</Footer>*/}
         </Wrapper>
     );
 };
