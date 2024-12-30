@@ -16,7 +16,7 @@ const Icon: FC<iIconProps> = ({ icon, width = 24, height = 24, fill = "none", ..
         return (<></>);
     }
     // @ts-ignore
-    return <SVGIcon width={width} height={height} fill={fill} {...props} />;
+    return <SVGIcon width={width} height={height} fill={fill} stroke={"black"} strokeWidth={"2px"} {...props} />;
 };
 
 

@@ -19,3 +19,16 @@ export { ReactComponent as IconNote } from "@/assets/icons/icon-note.svg";
 export { ReactComponent as IconBell } from "@/assets/icons/icon-bell.svg";
 export { ReactComponent as IconClose } from "@/assets/icons/icon-close.svg";
 export { ReactComponent as IconCloseThin } from "@/assets/icons/icon-close-thin.svg";
+
+
+// new
+export { ReactComponent as  Call} from "@/assets/icons/call.svg";
+export { ReactComponent as  Chat} from "@/assets/icons/chat.svg";
+export { ReactComponent as  Cure} from "@/assets/icons/cure.svg";
+export { ReactComponent as  Eat} from "@/assets/icons/eat.svg";
+export { ReactComponent as  Exercise} from "@/assets/icons/exercise.svg";
+export { ReactComponent as  Play} from "@/assets/icons/play.svg";
+export { ReactComponent as  Shower} from "@/assets/icons/shower.svg";
+export { ReactComponent as  Sleep} from "@/assets/icons/sleep.svg";
+export { ReactComponent as  Status} from "@/assets/icons/status.svg";
+

@@ -1,32 +1,34 @@
+import { Call, Cure, Exercise, Shower, Sleep, Status } from "@/components/Common/Icon/Icons.def";
+
 export const TopActionLabel = [
     {
-        key: "exercise",
+        key: "eat",
         label: "밥",
-        icon: "LiftingWeights",
+        icon: "Eat",
         width: 30,
         height: 30,
         handlerAction: () => console.log("onClick")
     },
     {
-        key: "shower",
+        key: "sleep",
         label: "수면",
-        icon: "Bathtub",
+        icon: "Sleep",
         width: 30,
         height: 30,
         handlerAction: () => console.log("onClick")
     },
     {
-        key: "bed",
+        key: "play",
         label: "놀기",
-        icon: "Bad",
+        icon: "Play",
         width: 30,
         height: 30,
         handlerAction: () => console.log("onClick")
     },
     {
-        key: "talk",
+        key: "cure",
         label: "치료",
-        icon: "ThoughtBalloon",
+        icon: "Cure",
         width: 30,
         height: 30,
         handlerAction: () => console.log("onClick")
@@ -36,33 +38,33 @@ export const TopActionLabel = [
 
 export const BottomActionLabel = [
     {
-        key: "exercise",
-        label: "목욕",
-        icon: "LiftingWeights",
-        width: 30,
-        height: 30,
-        handlerAction: () => console.log("onClick")
-    },
-    {
         key: "shower",
+        label: "목욕",
+        icon: "Shower",
+        width: 30,
+        height: 30,
+        handlerAction: () => console.log("onClick")
+    },
+    {
+        key: "status",
         label: "상태",
-        icon: "Bathtub",
+        icon: "Status",
         width: 30,
         height: 30,
         handlerAction: () => console.log("onClick")
     },
     {
-        key: "bed",
+        key: "chat",
         label: "말하기",
-        icon: "Bad",
+        icon: "Chat",
         width: 30,
         height: 30,
         handlerAction: () => console.log("onClick")
     },
     {
-        key: "talk",
+        key: "call",
         label: "호출",
-        icon: "ThoughtBalloon",
+        icon: "Call",
         width: 30,
         height: 30,
         handlerAction: () => console.log("onClick")

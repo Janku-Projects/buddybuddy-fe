@@ -15,7 +15,7 @@ export const ActionNav: FC<iActionNavProps> = ({actionList}) => {
             {
                 actionList.map((action) =>(
                     <Box onClick={action.handlerAction} key={action.key}>
-                        <Icon width={action.width} height={action.height} icon={action.icon} />
+                        <Icon width={action.width} height={action.height} icon={action.icon}/>
                         {action.label}
                     </Box>
                 ))
