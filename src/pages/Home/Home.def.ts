@@ -1,72 +1,72 @@
 import { Call, Cure, Exercise, Shower, Sleep, Status } from "@/components/Common/Icon/Icons.def";
 
-export const TopActionLabel = [
+export const TopActionLabel = (handlerAction)  => [
     {
-        key: "eat",
+        key: "EAT",
         label: "밥",
         icon: "Eat",
         width: 30,
         height: 30,
-        handlerAction: () => console.log("onClick")
+        handlerAction: () => handlerAction("EAT")
     },
     {
-        key: "sleep",
+        key: "SLEEP",
         label: "수면",
         icon: "Sleep",
         width: 30,
         height: 30,
-        handlerAction: () => console.log("onClick")
+        handlerAction: () => handlerAction("SLEEP")
     },
     {
-        key: "play",
+        key: "PLAY",
         label: "놀기",
         icon: "Play",
         width: 30,
         height: 30,
-        handlerAction: () => console.log("onClick")
+        handlerAction: () => handlerAction("PLAY")
     },
     {
-        key: "cure",
+        key: "CURE",
         label: "치료",
         icon: "Cure",
         width: 30,
         height: 30,
-        handlerAction: () => console.log("onClick")
+        handlerAction: () => handlerAction("CURE")
     },
 ];
 
 
-export const BottomActionLabel = [
+export const BottomActionLabel = (handlerAction) =>  [
     {
-        key: "shower",
+        key: "SHOWER",
         label: "목욕",
         icon: "Shower",
         width: 30,
         height: 30,
-        handlerAction: () => console.log("onClick")
+        handlerAction: () => handlerAction("SHOWER")
     },
     {
-        key: "status",
+        key: "STATUS",
         label: "상태",
         icon: "Status",
         width: 30,
         height: 30,
-        handlerAction: () => console.log("onClick")
+        handlerAction: () => handlerAction("STATUS")
     },
     {
-        key: "chat",
+        key: "CHAT",
         label: "말하기",
         icon: "Chat",
         width: 30,
         height: 30,
-        handlerAction: () => console.log("onClick")
+        handlerAction: () => handlerAction("CHAT")
     },
     {
-        key: "call",
+        key: "CALL",
         label: "호출",
         icon: "Call",
         width: 30,
         height: 30,
-        handlerAction: () => console.log("onClick")
+        handlerAction: () => handlerAction("CALL")
     },
 ];

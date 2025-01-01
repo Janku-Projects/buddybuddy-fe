@@ -6,8 +6,11 @@ import { BottomActionLabel, TopActionLabel } from "@/pages/Home/Home.def";
 
 const Home = () => {
     const {
-        isReady // 화면 ready
+        isReady,
+        actionHandler// 화면 ready
     } = HomeHandler();
+
+
 
 
     return (
@@ -15,9 +18,9 @@ const Home = () => {
             {
                 isReady && (
                     <>
-                        <ActionNav style={{zIndex: 100}} actionList={TopActionLabel}/>
+                        <ActionNav style={{zIndex: 100}} actionList={TopActionLabel(actionHandler)}/>
                         <Buddy/>
-                        <ActionNav style={{zIndex: 100}} actionList={BottomActionLabel}/>
+                        <ActionNav style={{zIndex: 100}} actionList={BottomActionLabel(actionHandler)}/>
                     </>
                 )
 
