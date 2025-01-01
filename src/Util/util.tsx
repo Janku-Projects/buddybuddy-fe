@@ -5,9 +5,13 @@ export interface generalInterface {
 };
 
 
-export const getEnumValue = (target, value): number => {
-    if (!target || value === undefined || value === null) return 0;
-    console.log(112, Object.values(target))
-    const enumValue = Object.values(target).find((item) => item === value);
-    return typeof enumValue === "number" ? enumValue : 0;
+export const getEnumValue = (target, value) => {
+
 }
+
+export const formatTime = (seconds: number) => {
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const secs = seconds % 60;
+    return `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
+};

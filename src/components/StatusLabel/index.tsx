@@ -15,7 +15,6 @@ const StatusLabel: FC<iActionLabelProps> = ({ style }) => {
             <GaugeArea>
                 <ProgressBar label={`레벨20`} value={Math.round(30)} color={theme.colors.primary}/>
                 <ProgressBar label="피로도" value={0} color={theme.colors.error}/>
-
             </GaugeArea>
         </StatusLabelBox>
     );

@@ -26,16 +26,15 @@ const actionSlice = createSlice({
     name: "action",
     initialState: initState,
     reducers: {
-        setAction: (state, action: PayloadAction<eAction>) => {
-            console.log(1112, getEnumValue(eAction, action.payload))
-            console.log(222, action.payload)
-            state.action = getEnumValue(eAction, action.payload);
+        setAction: (state, action: PayloadAction<eAction | string>) => {
+            state.action = +eAction[action.payload]
         },
         clearAction: (state) => {
-            state.action = eAction.WAIT
+            console.log("clear")
+            state.action = +eAction.WAIT
         }
     }
 });
 
-export const { setAction } = actionSlice.actions;
+export const { setAction, clearAction } = actionSlice.actions;
 export default actionSlice.reducer;
