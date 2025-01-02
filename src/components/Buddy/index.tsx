@@ -5,7 +5,7 @@ import InfoLabel from "src/components/InfoLabel";
 import StatusLabel from "src/components/StatusLabel";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
-import Timer from "@/components/Timer";
+import Index from "@/components/Buddy/BuddyTimer";
 
 const Buddy: FC<any> = ({ fileName = 'chicken_lv_1', isShowLabel = true, level = 1, name = "" }) => {
     const [height, setHeight] = useState("55vh");
@@ -27,7 +27,7 @@ const Buddy: FC<any> = ({ fileName = 'chicken_lv_1', isShowLabel = true, level =
             {action === 6 && <StatusLabel/>}
 
             {/*SECT: 액션 중일 때, 타이머*/}
-            {(action !== 0 && action !== 6) && <Timer/>}
+            {(action !== 0 && action !== 6) && <Index/>}
 
             {/*SECT: 모델 */}
             <Three fileName={fileName} style={{ height }}/>

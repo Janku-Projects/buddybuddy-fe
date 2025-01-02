@@ -1,31 +1,43 @@
-import { FC } from "react";
-import { CancelBtn, TimeArea, TimerContainer, TimerWrapper } from "@/components/Timer/Timer.styled";
-import { formatTime, generalInterface } from "@/Util/util";
-import { useDispatch } from "react-redux";
-import { clearAction, setAction } from "@/store/slices/actionSlice";
+import { FC, useEffect, useState } from "react";
 
-interface iTimerProps extends generalInterface {
-
+interface iTimer {
+    onEnd: () => void;
+    min: number;
+    second: number;
 }
 
-const Timer: FC<iTimerProps> = ({}) => {
-    const dispatch = useDispatch();
 
-    const handleCancelAction = () => {
-        console.log("onClick:: ")
-        dispatch(clearAction());
-    }
+const Timer: FC<iTimer> = ({ onEnd, min, second }) => {
+    const MINUTES_IN_MS: number = min * 60 * 1000 + second * 1000;
+    const INTERVAL: number = 1000;
+
+    const [timeLeft, setTimeLeft] = useState<number>(MINUTES_IN_MS);
+
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setTimeLeft((prevTime) => prevTime - INTERVAL);
+        }, INTERVAL);
+
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            onEnd();
+        }
+
+        return () => clearInterval(timer);
+
+    }, [timeLeft]);
+
+
+    const formatTime = (time: number) => String(Math.floor(time)).padStart(2, '0');
+    const leftMinutes = formatTime(timeLeft / (1000 * 60) % 60);
+    const leftSeconds = formatTime((timeLeft / 1000) % 60);
+
 
     return (
-        <TimerWrapper>
-            <TimerContainer>
-                <TimeArea>
-                    <span className="txt">남은시간</span>
-                    <span className="time">{formatTime(180)}</span>
-                </TimeArea>
-                <CancelBtn onClick={handleCancelAction}>취소하기</CancelBtn>
-            </TimerContainer>
-        </TimerWrapper>
+        <>
+            {leftMinutes} : {leftSeconds}
+        </>
     );
 };
 
