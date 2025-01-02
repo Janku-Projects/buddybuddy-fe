@@ -1,4 +1,5 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
+import { TimeLeft } from "@/components/Timer/Timer.styled";
 
 interface iTimer {
     onEnd: () => void;
@@ -10,6 +11,8 @@ interface iTimer {
 const Timer: FC<iTimer> = ({ onEnd, min, second }) => {
     const MINUTES_IN_MS: number = min * 60 * 1000 + second * 1000;
     const INTERVAL: number = 1000;
+    const timerRef = useRef<HTMLDivElement>(null);
+
 
     const [timeLeft, setTimeLeft] = useState<number>(MINUTES_IN_MS);
 
@@ -21,6 +24,7 @@ const Timer: FC<iTimer> = ({ onEnd, min, second }) => {
 
         if (timeLeft <= 0) {
             clearInterval(timer);
+            onTimerEnd();
             onEnd();
         }
 
@@ -34,10 +38,18 @@ const Timer: FC<iTimer> = ({ onEnd, min, second }) => {
     const leftSeconds = formatTime((timeLeft / 1000) % 60);
 
 
+
+    const onTimerEnd = () => {
+        if(timerRef.current){
+            timerRef.current.classList.add("blink");
+            timerRef.current.style.color = 'red';
+        }
+    }
+
     return (
-        <>
+        <TimeLeft ref={timerRef}>
             {leftMinutes} : {leftSeconds}
-        </>
+        </TimeLeft>
     );
 };
 

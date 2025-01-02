@@ -37,7 +37,7 @@ const Index: FC<iTimerProps> = ({}) => {
                 <TimeArea>
                     <span className="txt">남은시간</span>
                     <span className="time">
-                        <Timer onEnd={onEndTimer}  min={3} second={0}/>
+                        <Timer onEnd={onEndTimer}  min={0} second={10}/>
                     </span>
                 </TimeArea>
                 <CancelBtn onClick={handleCancelAction}>취소하기</CancelBtn>
