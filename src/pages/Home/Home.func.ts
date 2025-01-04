@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { RootState } from "@/store/store";
 import { setHeader } from "@/store/slices/uiSlice";
 import { setAction } from "@/store/slices/actionSlice";
+import { setModel } from "@/store/slices/modelSlice";
 
 const HomeHandler = () => {
     const dispatch = useDispatch();
@@ -20,7 +21,12 @@ const HomeHandler = () => {
     const actionHandler = (params) => {
         console.log("current action : ", action);
         console.log("change action : ", params);
-        dispatch(setAction(params));
+        if(params === "CALL"){
+            dispatch(setModel({ fov: 10 }));
+        } else {
+            dispatch(setAction(params));
+        }
+
     }
 
 

@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface iBuddySlice {
-    data: any;
-    buddy: any;
+    buddy: any; // buddy 정보
+    data: any; // buddy info data
 }
 
 const initState: iBuddySlice = {
