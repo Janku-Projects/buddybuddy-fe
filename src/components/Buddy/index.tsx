@@ -7,8 +7,11 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import Index from "@/components/Buddy/BuddyTimer";
 
-const Buddy: FC<any> = ({ fileName = 'chicken_lv_1', isShowLabel = true, level = 1, name = "" }) => {
+const Buddy: FC<any> = ({  isShowLabel = true, level = 1}) => {
     const [height, setHeight] = useState("55vh");
+    const { model } = useSelector((state: RootState) => state.model);
+
+
     const { action } = useSelector((state: RootState) => state.action);
 
     const calculateHeight = () => {
@@ -30,7 +33,7 @@ const Buddy: FC<any> = ({ fileName = 'chicken_lv_1', isShowLabel = true, level =
             {(action !== 0 && action !== 6) && <Index/>}
 
             {/*SECT: 모델 */}
-            <Three fileName={fileName} style={{ height }}/>
+            <Three fileName={model.name} style={{ height }}/>
             {/*{action.toString()}*/}
 
             {/*SECT: 레벨과 이름*/}

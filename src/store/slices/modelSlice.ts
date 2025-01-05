@@ -1,19 +1,26 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface iModelSlice {
-    fov: number
+    model: {
+        name: string
+    },
+    camera: {
+        fov: number,
+    }
 }
 
 const initState: iModelSlice = {
-    fov: 15
+    model: {name: "chicken_lv_1.obj"},
+    camera: {fov: 15}
 };
 
 const modelSlice = createSlice({
     name: "model",
     initialState: initState,
     reducers: {
-        setModel: (state, action: PayloadAction<iModelSlice>) => {
-            // state.fov = +action.payload.fov
+        setModel: (state, action: PayloadAction<string>) => {
+            console.log(action.payload)
+            state.model.name = action.payload;
         }
     }
 

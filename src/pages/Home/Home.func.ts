@@ -9,7 +9,12 @@ const HomeHandler = () => {
     const dispatch = useDispatch();
     const buddy = useSelector((state: RootState) => state.buddy);
     const [isReady, setReady] = useState<boolean>(false);
+
     const { action } = useSelector((state: RootState) => state.action);
+
+    const setObjModel = () => {
+        dispatch(setModel("monster_lv_1.obj"))
+    }
 
 
     const getBuddy = () => {
@@ -22,7 +27,7 @@ const HomeHandler = () => {
         console.log("current action : ", action);
         console.log("change action : ", params);
         if(params === "CALL"){
-            dispatch(setModel({ fov: 10 }));
+            // dispatch(setModel({ fov: 10 }));
         } else {
             dispatch(setAction(params));
         }
@@ -44,6 +49,7 @@ const HomeHandler = () => {
 
     return {
         isReady,
+        setObjModel,
         actionHandler
     };
 };

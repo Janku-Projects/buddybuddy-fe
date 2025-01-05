@@ -7,6 +7,7 @@ import { BottomActionLabel, TopActionLabel } from "@/pages/Home/Home.def";
 const Home = () => {
     const {
         isReady,
+        setObjModel,
         actionHandler// 화면 ready
     } = HomeHandler();
 
@@ -19,7 +20,8 @@ const Home = () => {
                 isReady && (
                     <>
                         <ActionNav style={{zIndex: 100}} actionList={TopActionLabel(actionHandler)}/>
-                        <Buddy/>
+                        <button onClick={setObjModel}>CLICK</button>
+                        <Buddy />
                         <ActionNav style={{zIndex: 100}} actionList={BottomActionLabel(actionHandler)}/>
                     </>
                 )

@@ -27,7 +27,9 @@ const Model = ({ fileName }) => {
 			ref.current.rotation.x = THREE.MathUtils.degToRad(rotationX); // Pitch
 		}
 	}, [obj, rotationX, rotationY]);
+
 	useLayoutEffect(() => {
+		console.log("changed:: ", fileName)
 		obj.traverse((child) => { // 자식 요소를 순회하는 함수
 			if (child?.isMesh) { // 메시(mesh) 객체를 식별 > "겉면"을 구성하는 기본 단위
 				let newMaterial = child.material.clone();

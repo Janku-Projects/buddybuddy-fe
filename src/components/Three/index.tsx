@@ -13,12 +13,12 @@ interface iThree extends generalInterface{
 }
 
 const Three: FC<iThree> = ({ fileName, style }) => {
-    const {fov} = useSelector((state: RootState) => state.model);
+    // const {fov} = useSelector((state: RootState) => state.model);
 
 
 
     return (
-        <Canvas camera={{ position: [0, 0, 3], fov: fov }} style={style}>
+        <Canvas camera={{ position: [0, 0, 3], fov: 15 }} style={style}>
             <LightController/>
             <OrbitController/>
             <Model fileName={fileName}/>
