@@ -10,16 +10,14 @@ interface iModelSlice {
 }
 
 const initState: iModelSlice = {
-    model: {name: "chicken_lv_1.obj"},
+    model: {name: "chicken_lv_1"},
     camera: {fov: 15}
 };
 
 const modelSlice = createSlice({
-    name: "model",
-    initialState: initState,
+    name: "model", initialState: initState,
     reducers: {
         setModel: (state, action: PayloadAction<string>) => {
-            console.log(action.payload)
             state.model.name = action.payload;
         }
     }

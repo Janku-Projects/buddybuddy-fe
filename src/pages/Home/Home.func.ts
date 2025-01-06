@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { RootState } from "@/store/store";
-import { setHeader } from "@/store/slices/uiSlice";
+import { setHeader, setIsLoading } from "@/store/slices/uiSlice";
 import { setAction } from "@/store/slices/actionSlice";
 import { setModel } from "@/store/slices/modelSlice";
 
@@ -13,7 +13,9 @@ const HomeHandler = () => {
     const { action } = useSelector((state: RootState) => state.action);
 
     const setObjModel = () => {
-        dispatch(setModel("monster_lv_1.obj"))
+        setIsLoading(true);
+        dispatch(setModel("monster_lv_1"))
+        setIsLoading(false);
     }
 
 
