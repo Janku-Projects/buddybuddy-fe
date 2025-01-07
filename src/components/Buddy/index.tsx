@@ -10,8 +10,6 @@ import Index from "@/components/Buddy/BuddyTimer";
 const Buddy: FC<any> = ({  isShowLabel = true, level = 1}) => {
     const [height, setHeight] = useState("55vh");
     const { model } = useSelector((state: RootState) => state.model);
-
-
     const { action } = useSelector((state: RootState) => state.action);
 
     const calculateHeight = () => {

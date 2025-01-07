@@ -4,6 +4,7 @@ import { RootState } from "@/store/store";
 import { setHeader, setIsLoading } from "@/store/slices/uiSlice";
 import { setAction } from "@/store/slices/actionSlice";
 import { setModel } from "@/store/slices/modelSlice";
+import { setBuddyInfo } from "@/store/slices/buddySlice";
 
 const HomeHandler = () => {
     const dispatch = useDispatch();
@@ -12,10 +13,15 @@ const HomeHandler = () => {
 
     const { action } = useSelector((state: RootState) => state.action);
 
-    const setObjModel = () => {
+    const handleModel = () => {
         setIsLoading(true);
         dispatch(setModel("monster_lv_1"))
         setIsLoading(false);
+    }
+
+    const handleBuddyData = () => {
+        dispatch(setBuddyInfo({hunger: 10}));
+
     }
 
 
@@ -40,7 +46,7 @@ const HomeHandler = () => {
 
     // SECT: MOUNTED > Buddy check
     useEffect(() => {
-        if (!buddy.data || !buddy.buddy) {
+        if (!buddy.buddyInfo || !buddy.buddy) {
             const buddy = getBuddy();
         }
         dispatch(setHeader("메인페이지")); // 헤더 확인
@@ -51,7 +57,8 @@ const HomeHandler = () => {
 
     return {
         isReady,
-        setObjModel,
+        handleBuddyData,
+        handleModel,
         actionHandler
     };
 };

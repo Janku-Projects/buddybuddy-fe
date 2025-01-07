@@ -20,18 +20,18 @@ interface iActionSlice {
 
 const initState: iActionSlice = {
     action: 0
-}
+};
 
 const actionSlice = createSlice({
     name: "action",
     initialState: initState,
     reducers: {
         setAction: (state, action: PayloadAction<eAction | string>) => {
-            state.action = +eAction[action.payload]
+            state.action = +eAction[action.payload];
         },
         clearAction: (state) => {
-            console.log("clear")
-            state.action = +eAction.WAIT
+            console.log("clear");
+            state.action = +eAction.WAIT;
         }
     }
 });
