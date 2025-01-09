@@ -35,7 +35,7 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 ### action 정보
 ```
 hunger: number; // 포만감
-fatigue: number; // 스테미나 (피로도)
+stamina: number; // 스테미나 (피로도)
 affection: number; // 애정도
 health: number; // 건강
 hygiene: number; // 위생도

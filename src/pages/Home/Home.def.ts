@@ -7,6 +7,7 @@ export const TopActionLabel = (handlerAction)  => [
         icon: "Eat",
         width: 30,
         height: 30,
+        gain: {key: "hunger", value: 30},
         handlerAction: () => handlerAction("EAT")
     },
     {
@@ -15,6 +16,7 @@ export const TopActionLabel = (handlerAction)  => [
         icon: "Sleep",
         width: 30,
         height: 30,
+        gain: {key: "stamina", value: 100},
         handlerAction: () => handlerAction("SLEEP")
     },
     {
@@ -23,6 +25,7 @@ export const TopActionLabel = (handlerAction)  => [
         icon: "Play",
         width: 30,
         height: 30,
+        gain: {key: "stamina", value: 100},
         handlerAction: () => handlerAction("PLAY")
     },
     {
@@ -31,6 +34,7 @@ export const TopActionLabel = (handlerAction)  => [
         icon: "Cure",
         width: 30,
         height: 30,
+        gain: {key: "health", value: 1},
         handlerAction: () => handlerAction("CURE")
     },
 ];
@@ -43,6 +47,7 @@ export const BottomActionLabel = (handlerAction) =>  [
         icon: "Shower",
         width: 30,
         height: 30,
+        gain: {key: "hygiene", value: 50},
         handlerAction: () => handlerAction("SHOWER")
     },
     {

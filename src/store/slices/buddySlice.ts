@@ -30,10 +30,16 @@ const buddySlice = createSlice({
             state.buddy = action.payload.buddy;
         },
         setBuddyInfo: (state, action: PayloadAction<any>) => {
+            const key = Object.keys(action.payload)[0]; // Get the dynamic key
+            const value = action.payload[key]; // Get the value from action.payload
+
+            // Update the buddyInfo state
             state.buddyInfo = {
                 ...state.buddyInfo,
-                ...action.payload,
+                [key]: (state.buddyInfo[key] || 0) + value, // Safely add the value (default to 0 if undefined)
             };
+
+            console.log(112, state.buddyInfo); // Log the updated buddyInfo
         }
     }
 
