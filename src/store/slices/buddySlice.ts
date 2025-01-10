@@ -4,7 +4,7 @@ interface iBuddySlice {
     buddy: any; // buddy 정보 general (어떤 버디 등)
     buddyInfo: {
         hunger: number; // 배고픔
-        fatigue: number; // 피로도
+        stamina: number; // 피로도
         affection: number; // 애정도
         health: number; // 건강
         hygiene: number; // 위생도
@@ -14,11 +14,11 @@ interface iBuddySlice {
 const initState: iBuddySlice = {
     buddy: null,
     buddyInfo: {
-        hunger: 0,
-        fatigue: 0,
+        hunger: 100,
+        stamina: 100,
         affection: 0,
-        health: 0,
-        hygiene: 0,
+        health: 1,
+        hygiene: 100,
     }
 };
 
@@ -29,23 +29,33 @@ const buddySlice = createSlice({
         setBuddy: (state, action: PayloadAction<iBuddySlice>) => {
             state.buddy = action.payload.buddy;
         },
-        setBuddyInfo: (state, action: PayloadAction<any>) => {
+        setGainBuddyInfo: (state, action: PayloadAction<any>) => {
+            const key = Object.keys(action.payload)[0]; // Get the dynamic key
+            const value = action.payload[key]; // Get the value from action.payload
+            // Update the buddyInfo state
+            state.buddyInfo = {
+                ...state.buddyInfo,
+                [key]: (state.buddyInfo[key] || 0) + value,
+            };
+            console.log(112, state.buddyInfo);
+        },
+        setLossBuddyInfo:  (state, action: PayloadAction<any>) => {
             const key = Object.keys(action.payload)[0]; // Get the dynamic key
             const value = action.payload[key]; // Get the value from action.payload
 
             // Update the buddyInfo state
             state.buddyInfo = {
                 ...state.buddyInfo,
-                [key]: (state.buddyInfo[key] || 0) + value, // Safely add the value (default to 0 if undefined)
+                [key]: (state.buddyInfo[key]) - value,
             };
-
-            console.log(112, state.buddyInfo); // Log the updated buddyInfo
-        }
+            // TODO: 만약 0보다 작을 경우, 디메릿 추가
+            console.log(112, state.buddyInfo);
+        },
     }
 
 });
 
 // export actions
-export const { setBuddy, setBuddyInfo } = buddySlice.actions;
+export const { setBuddy, setGainBuddyInfo, setLossBuddyInfo } = buddySlice.actions;
 // export reducers
 export default buddySlice.reducer;

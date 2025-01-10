@@ -4,7 +4,7 @@ import { RootState } from "@/store/store";
 import { setHeader, setIsLoading } from "@/store/slices/uiSlice";
 import { setAction } from "@/store/slices/actionSlice";
 import { setModel } from "@/store/slices/modelSlice";
-import { setBuddyInfo } from "@/store/slices/buddySlice";
+import { setGainBuddyInfo } from "@/store/slices/buddySlice";
 
 const HomeHandler = () => {
     const dispatch = useDispatch();
@@ -20,7 +20,7 @@ const HomeHandler = () => {
     }
 
     const handleBuddyData = () => {
-        dispatch(setBuddyInfo({hunger: 10}));
+        dispatch(setGainBuddyInfo({hunger: 10}));
 
     }
 

@@ -32,7 +32,7 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ## Learn More
 ### 모든 정보는 localStorage 에 누적
-### action 정보
+### action 정보 > 모든 행동은 행동이 마치고, 적립/차감 되는 방식
 ```
 hunger: number; // 포만감
 stamina: number; // 스테미나 (피로도)

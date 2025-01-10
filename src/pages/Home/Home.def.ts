@@ -7,7 +7,9 @@ export const TopActionLabel = (handlerAction)  => [
         icon: "Eat",
         width: 30,
         height: 30,
-        gain: {key: "hunger", value: 30},
+        gain: {key: "hunger", value: 40},
+        loss: {key: "stamina", value: 10},
+        time: 60 * 30 * 1000, // 30분
         handlerAction: () => handlerAction("EAT")
     },
     {
@@ -17,6 +19,8 @@ export const TopActionLabel = (handlerAction)  => [
         width: 30,
         height: 30,
         gain: {key: "stamina", value: 100},
+        loss: {key: "hunger", value: 30},
+        time: 60 * 60 * 1000 * 6, // 6시간
         handlerAction: () => handlerAction("SLEEP")
     },
     {
@@ -25,7 +29,9 @@ export const TopActionLabel = (handlerAction)  => [
         icon: "Play",
         width: 30,
         height: 30,
-        gain: {key: "stamina", value: 100},
+        gain: {key: "affection", value: 50},
+        loss: {key: "hunger", value: 30},
+        time: 60 * 60 * 1000, // 1시간
         handlerAction: () => handlerAction("PLAY")
     },
     {
@@ -35,6 +41,8 @@ export const TopActionLabel = (handlerAction)  => [
         width: 30,
         height: 30,
         gain: {key: "health", value: 1},
+        loss: {key: "stamina", value: 10},
+        time: 60 * 10 * 1000, // 10분
         handlerAction: () => handlerAction("CURE")
     },
 ];
@@ -48,6 +56,8 @@ export const BottomActionLabel = (handlerAction) =>  [
         width: 30,
         height: 30,
         gain: {key: "hygiene", value: 50},
+        loss: {key: "stamina", value: 20},
+        time: 60 * 30 * 1000, // 30분
         handlerAction: () => handlerAction("SHOWER")
     },
     {
@@ -64,6 +74,8 @@ export const BottomActionLabel = (handlerAction) =>  [
         icon: "Chat",
         width: 30,
         height: 30,
+        loss: {key: "stamina", value: 5},
+        time: 60 * 30 * 1000, // 30분
         handlerAction: () => handlerAction("CHAT")
     },
     {
@@ -72,6 +84,8 @@ export const BottomActionLabel = (handlerAction) =>  [
         icon: "Call",
         width: 30,
         height: 30,
+        loss: {key: "stamina", value: 5},
+        time: 60 * 10 * 1000, // 10분
         handlerAction: () => handlerAction("CALL")
     },
 ];
