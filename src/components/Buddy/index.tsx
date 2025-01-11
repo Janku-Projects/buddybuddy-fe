@@ -5,7 +5,7 @@ import InfoLabel from "src/components/InfoLabel";
 import StatusLabel from "src/components/StatusLabel";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
-import Index from "@/components/Buddy/BuddyTimer";
+import BuddyTimer from "@/components/Buddy/BuddyTimer";
 
 const Buddy: FC<any> = ({  isShowLabel = true, level = 1}) => {
     const [height, setHeight] = useState("55vh");
@@ -22,13 +22,15 @@ const Buddy: FC<any> = ({  isShowLabel = true, level = 1}) => {
         setHeight(calculateHeight());
     }, []);
 
+
+
     return (
         <BuddyWrapper>
             {/*SECT: 상태 호출*/}
             {action === 6 && <StatusLabel/>}
 
             {/*SECT: 액션 중일 때, 타이머*/}
-            {(action !== 0 && action !== 6) && <Index/>}
+            {(action !== 0 && action !== 6) && <BuddyTimer/>}
 
             {/*SECT: 모델 */}
             <Three fileName={model.name} style={{ height }}/>

@@ -7,36 +7,34 @@ import { useDispatch } from "react-redux";
 
 
 interface iActionNavProps extends generalInterface {
-    actionList: any[]
+    actionList: any[];
 }
 
-export const ActionNav: FC<iActionNavProps> = ({actionList}) => {
+export const ActionNav: FC<iActionNavProps> = ({ actionList }) => {
     const dispatch = useDispatch();
 
     const onClickAction = (payload) => {
-
         // TODO::
-        console.log(112, payload.gain)
-        if(payload.gain){
-            const {key, value} = payload.gain
+        console.log(112, payload.gain);
+        if (payload.gain) {
+            const { key, value } = payload.gain;
             dispatch(setGainBuddyInfo({ [key]: value }));
         }
 
-        if(payload.minus){
-            const {key, value} = payload.minus
+        if (payload.minus) {
+            const { key, value } = payload.minus;
             dispatch(setGainBuddyInfo({ [key]: value }));
-
         }
 
         // TODO::
-        payload.handlerAction()
-    }
+        payload.handlerAction();
+    };
 
 
     return (
         <Container>
             {
-                actionList.map((action) =>(
+                actionList.map((action) => (
                     <Box onClick={() => onClickAction(action)} key={action.key}>
                         <Icon width={action.width} height={action.height} icon={action.icon}/>
                         {action.label}
@@ -44,5 +42,5 @@ export const ActionNav: FC<iActionNavProps> = ({actionList}) => {
                 ))
             }
         </Container>
-    )
-}
+    );
+};

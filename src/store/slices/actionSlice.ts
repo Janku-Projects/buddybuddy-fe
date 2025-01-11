@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { getEnumValue } from "@/Util/util";
 
-enum eAction {
+export enum eAction {
     WAIT,
     EAT,
     SLEEP,
