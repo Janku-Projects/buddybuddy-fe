@@ -33,6 +33,8 @@ const buddySlice = createSlice({
             const key = Object.keys(action.payload)[0]; // Get the dynamic key
             const value = action.payload[key]; // Get the value from action.payload
             // Update the buddyInfo state
+            // TODO:: []로 나누기
+
             state.buddyInfo = {
                 ...state.buddyInfo,
                 [key]: (state.buddyInfo[key] || 0) + value,
@@ -42,6 +44,8 @@ const buddySlice = createSlice({
         setLossBuddyInfo:  (state, action: PayloadAction<any>) => {
             const key = Object.keys(action.payload)[0]; // Get the dynamic key
             const value = action.payload[key]; // Get the value from action.payload
+
+            // TODO:: []로 나누기
 
             // Update the buddyInfo state
             state.buddyInfo = {

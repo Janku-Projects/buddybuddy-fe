@@ -46,7 +46,10 @@ const BuddyTimer: FC<iTimerProps> = ({}) => {
             const { tempMinutes, tempSeconds } = convertMillisecondsToMinutesAndSeconds(matchingAction.time);
             setMinutes(tempMinutes);
             setSeconds(tempSeconds);
-            setTimeout(() => setReady(true))
+            setTimeout(() => {
+                setReady(true)
+
+            })
         }
     }, [action]);
 

@@ -14,7 +14,7 @@ export const ActionNav: FC<iActionNavProps> = ({ actionList }) => {
     const dispatch = useDispatch();
 
     const onClickAction = (payload) => {
-        // TODO::
+        // TODO:: []로 나누기
         console.log(112, payload.gain);
         if (payload.gain) {
             const { key, value } = payload.gain;
