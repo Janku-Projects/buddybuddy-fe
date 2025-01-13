@@ -23,11 +23,14 @@ export const Wrapper = styled.div`
 
 export const Header = styled.header`
     background-color: ${(props) => props.theme.colors.primary};
+    display: flex;
+    flex-direction: row;
+    width: 100%;
     color: black;
-    text-align: center;
+    align-items: center;
+    //text-align: center;
     padding: 1rem;
     font-size: 1.5rem;
-
 `;
 
 export const Body = styled.main`

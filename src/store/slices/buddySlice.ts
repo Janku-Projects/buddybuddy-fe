@@ -1,7 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface iBuddySlice {
-    buddy: any; // buddy 정보 general (어떤 버디 등)
+    buddy: {
+        name: string,
+        exp: number
+    }; // buddy 정보 general (어떤 버디 등)
     buddyInfo: {
         hunger: number; // 배고픔
         stamina: number; // 피로도
@@ -12,7 +15,10 @@ interface iBuddySlice {
 }
 
 const initState: iBuddySlice = {
-    buddy: null,
+    buddy: {
+        name: "삐약이",
+        exp: 0,
+    },
     buddyInfo: {
         hunger: 100,
         stamina: 100,

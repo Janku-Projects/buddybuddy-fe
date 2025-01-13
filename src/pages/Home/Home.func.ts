@@ -15,7 +15,8 @@ const HomeHandler = () => {
 
     const handleModel = () => {
         setIsLoading(true);
-        dispatch(setModel("monster_lv_1"))
+        dispatch(setModel("monster_lv_1"));
+
         setIsLoading(false);
     }
 
