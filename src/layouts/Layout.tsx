@@ -1,6 +1,6 @@
 import React, { FC, ReactNode } from "react";
 // import { Body, Footer, Header, Wrapper } from "@/layouts/Layout.styled";
-import { Body, Footer, Header, Wrapper } from "./Layout.styled";
+import { Body, Footer, Header, Wrapper, ButtonWrap } from "./Layout.styled";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import Icon from "@/components/Common/Icon";
@@ -12,12 +12,12 @@ interface layoutProps {
 
 const Layout = ({ children }: layoutProps) => {
     const navigate = useNavigate();
-    const ui = useSelector((state: RootState) => state.ui)
+    const ui = useSelector((state: RootState) => state.ui);
 
     const handleNavigate = () => {
-        console.log(111)
+        console.log(111);
         navigate("/");
-    }
+    };
 
     return (
         <Wrapper>
@@ -26,20 +26,17 @@ const Layout = ({ children }: layoutProps) => {
                     icon="Logo"
                     width={100}
                     height={20}
-                    style={{border: "1px solid red"}}
                     onClick={handleNavigate}
                 />
-                <div style={{marginLeft: "auto"}}>{ui.header}</div>
-                {/*<ButtonWrap>*/}
-                    <div style={{marginLeft: "auto"}}>
-                        <Link to="info">
-                            <Icon icon="IconQuestion"  width={30}/>
-                        </Link>
-                        <Link to="my-page">
-                            <Icon icon="IconSetting" width={30}/>
-                        </Link>
-                    </div>
-                {/*</ButtonWrap>*/}
+                <div style={{ marginLeft: "auto" }}>{ui.header}</div>
+                <ButtonWrap>
+                    <Link to="info">
+                        <Icon icon="IconQuestion" width={20} height={20}/>
+                    </Link>
+                    <Link to="my-page">
+                        <Icon icon="IconSetting" width={20} height={20}/>
+                    </Link>
+                </ButtonWrap>
             </Header>
             <Body>
                 {children}

@@ -2,14 +2,14 @@ import styled from "styled-components";
 
 
 export const LayoutContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 
-  main {
-    flex: 1;
-    overflow-y: auto;
-  }
+    main {
+        flex: 1;
+        overflow-y: auto;
+    }
 `;
 
 
@@ -51,4 +51,13 @@ export const Footer = styled.footer`
     font-size: 1rem;
 `;
 
-
+export const ButtonWrap = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    margin-left: auto;
+    a {
+        display: flex;
+    }
+`;
