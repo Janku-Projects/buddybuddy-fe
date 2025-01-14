@@ -16,7 +16,7 @@ const Layout = ({ children }: layoutProps) => {
 
     const handleNavigate = () => {
         console.log(111)
-        navigate("/", { replace: true });
+        navigate("/");
     }
 
     return (
@@ -29,7 +29,7 @@ const Layout = ({ children }: layoutProps) => {
                     style={{border: "1px solid red"}}
                     onClick={handleNavigate}
                 />
-                {ui.header}
+                <div style={{marginLeft: "auto"}}>{ui.header}</div>
                 {/*<ButtonWrap>*/}
                     <div style={{marginLeft: "auto"}}>
                         <Link to="info">

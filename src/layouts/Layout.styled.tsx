@@ -17,7 +17,7 @@ export const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     height: 100vh; /* Full viewport height */
-    font: black;
+    font: ${(props) => props.theme.colors.primary};
     border: 1px solid blue;
 `;
 
