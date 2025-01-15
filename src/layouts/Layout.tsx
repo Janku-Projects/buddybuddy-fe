@@ -14,6 +14,7 @@ const Layout = ({ children }: layoutProps) => {
     const navigate = useNavigate();
     const ui = useSelector((state: RootState) => state.ui);
 
+
     const handleNavigate = () => {
         console.log(111);
         navigate("/");
@@ -33,7 +34,7 @@ const Layout = ({ children }: layoutProps) => {
                     <Link to="info">
                         <Icon icon="IconQuestion" width={20} height={20}/>
                     </Link>
-                    <Link to="my-page">
+                    <Link to="setting">
                         <Icon icon="IconSetting" width={20} height={20}/>
                     </Link>
                 </ButtonWrap>
