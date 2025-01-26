@@ -2,7 +2,7 @@ import { FC, SVGAttributes } from "react";
 import * as icons from "@/components/Common/Icon/Icons.def";
 
 interface iIconProps extends SVGAttributes<SVGElement> {
-    icon: keyof typeof icons;
+    icon: keyof typeof icons | string;
     width: number;
     height?: number;
     fill?: string;

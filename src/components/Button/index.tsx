@@ -1,7 +1,7 @@
 import React from "react";
-import { ButtonProps, StyledButton } from "@/components/Button/Button.styled";
+import { iCustomButtonProps, StyledButton } from "@/components/Button/Button.styled";
 
-const Button = ({
+const CustomButton = ({
                     children,
                     onClick,
                     type = "button",
@@ -10,7 +10,7 @@ const Button = ({
                     btnType = "round",
                     disabled,
                     className
-                }: ButtonProps) => {
+                }: iCustomButtonProps) => {
     return (
         <StyledButton
             className={className}
@@ -26,4 +26,4 @@ const Button = ({
     );
 };
 
-export default Button;
+export default CustomButton;

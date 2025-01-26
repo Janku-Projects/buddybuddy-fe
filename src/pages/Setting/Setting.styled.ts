@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 
 export const SettingWrapper = styled.div`
-    padding: 16px;
+    padding: 0.8rem;
     height: 100%;
 `;
 
@@ -64,5 +64,4 @@ export const TitleBox = styled.p`
     font-weight: ${({ theme }) => theme.fontWeights.semiBold};
     color: ${({ theme }) => theme.colors.blueGrey90};
     line-height: 150%;
-
 `;

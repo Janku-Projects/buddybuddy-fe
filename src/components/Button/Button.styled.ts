@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
-export interface ButtonProps {
+export interface iCustomButtonProps {
     /** 버튼 안의 내용 */
     children?: React.ReactNode;
     /** 버튼 클릭 시 호출할 함수 */
@@ -19,7 +19,7 @@ export interface ButtonProps {
     className?: string;
 }
 
-export const StyledButton = styled.button<ButtonProps>`
+export const StyledButton = styled.button<iCustomButtonProps>`
   border: none;
   text-align: center;
   color: #fff;
