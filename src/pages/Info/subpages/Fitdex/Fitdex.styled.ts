@@ -124,14 +124,3 @@ export const ModalContainer = styled.div`
   }
 `;
 
-export const FitdexRowHint = styled.div`
-    p{
-        border-radius: 8px;
-        background-color: ${({ theme }) => theme.color.blueGrey03};
-        padding: 4px 10px;
-
-        font-size: ${({ theme }) => theme.fontSize.sm};
-        font-weight: ${({ theme }) => theme.fontWeight.medium};
-        line-height: 130%;
-    }
-`;
