@@ -22,7 +22,6 @@ const MyInfo = () => {
     return (
         <MyInfoWrapper>
             <MyInfoContainer>
-
                 <NicknameSect>
                     <InputBox></InputBox>
                 </NicknameSect>
