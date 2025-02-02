@@ -47,10 +47,11 @@ const HomeHandler = () => {
 
     // SECT: MOUNTED > Buddy check
     useEffect(() => {
+        dispatch(setHeader("")); // 헤더 확인
+
         if (!buddy.buddyInfo || !buddy.buddy) {
             const buddy = getBuddy();
         }
-        dispatch(setHeader("메인페이지")); // 헤더 확인
         setReady(true); // 화면 준비
     }, []);
 

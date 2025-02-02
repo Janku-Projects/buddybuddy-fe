@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { setHeader } from "@/store/slices/uiSlice";
 import { EmptyData } from "@/components/Empty/EmptyData";
 import { IconBox, ListItem } from "@/pages/Info/subpages/History/History.styled";
-import { dummyActivities } from "@/dummy/data";
+import { dummyActivities } from "@/constants/dummy/data";
 import Icon from "@/components/Common/Icon";
 import dayjs from "dayjs";
 
@@ -102,6 +102,10 @@ const History = () => {
 
     useEffect(() => {
         dispatch(setHeader("행동기록"));
+
+        return () => {
+            dispatch(setHeader(""));
+        }
     }, [dispatch]);
 
 

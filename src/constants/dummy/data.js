@@ -1,3 +1,4 @@
+// SECT:: [행동기록에서 사용] > src/pages/Info/subpages/History/terms.tsx
 export const dummyActivities = [
 	{ id: 1, action: "EXERCISE", start: "2025-02-01T08:00:00Z", mp: 5, hp: 10 },
 	{ id: 2, action: "SHOWER", start: "2025-02-01T09:00:00Z", hp: 5 },

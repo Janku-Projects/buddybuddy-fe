@@ -16,19 +16,32 @@ const Layout = ({ children }: layoutProps) => {
 
 
     const handleNavigate = () => {
-        console.log(111);
         navigate("/");
+    };
+
+    const handleBack = () => {
+        navigate(-1);
     };
 
     return (
         <Wrapper>
             <Header>
-                <Icon
-                    icon="Logo"
-                    width={100}
-                    height={20}
-                    onClick={handleNavigate}
-                />
+                {
+                    ui.header !== ''
+                        ? <Icon
+                            icon="IconBack"
+                            height={20}
+                            stroke={"black"} strokeWidth={"2px"}
+                            onClick={handleBack}
+                        />
+                        : <Icon
+                            icon="Logo"
+                            width={100}
+                            height={20}
+                            stroke={"black"} strokeWidth={"2px"}
+                            onClick={handleNavigate}
+                        />
+                }
                 <div style={{ marginLeft: "auto" }}>{ui.header}</div>
                 <ButtonWrap>
                     <Link to="info">

@@ -6,7 +6,7 @@ interface iUISlice {
 }
 
 const initState: iUISlice = {
-   header: "",
+    header: "",
     isLoading: false
 };
 
@@ -15,16 +15,16 @@ const uiSlice = createSlice({
     initialState: initState,
     reducers: {
         setHeader: (state, action: PayloadAction<string>) => {
-            state.header = action.payload
+            state.header = action.payload;
         },
         setIsLoading: (state, action: PayloadAction<boolean>) => {
-            state.isLoading = action.payload
+            state.isLoading = action.payload;
         }
     }
 
 });
 
 // export actions
-export const { setHeader,setIsLoading } = uiSlice.actions;
+export const { setHeader, setIsLoading } = uiSlice.actions;
 // export reducers
 export default uiSlice.reducer;

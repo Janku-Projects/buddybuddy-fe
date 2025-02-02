@@ -3,6 +3,9 @@ import Icon from "@/components/Common/Icon";
 import { useNavigate } from "react-router-dom";
 import { Divider } from '@mui/material';
 import { menuItems } from "@/pages/Info/inso.defs";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { setHeader } from "@/store/slices/uiSlice";
 
 
 interface iInfoProps {
@@ -11,6 +14,12 @@ interface iInfoProps {
 
 const Info = ({}: iInfoProps) => {
     const navigate = useNavigate();
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(setHeader("개인 정보"));
+
+        return () => {dispatch(setHeader(""));}
+    }, []);
 
     return (
         <>
