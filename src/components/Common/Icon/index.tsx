@@ -3,7 +3,7 @@ import * as icons from "@/components/Common/Icon/Icons.def";
 
 interface iIconProps extends SVGAttributes<SVGElement> {
     icon: keyof typeof icons | string;
-    width: number;
+    width?: number;
     height?: number;
     fill?: string;
 }
@@ -16,7 +16,7 @@ const Icon: FC<iIconProps> = ({ icon, width = 24, height = 24, fill = "none", ..
         return (<></>);
     }
     // @ts-ignore
-    return <SVGIcon width={width} height={height} fill={fill} stroke={"black"} strokeWidth={"2px"} {...props} />;
+    return <SVGIcon {...props} width={width} height={height} fill={fill}  />;
 };
 
 
