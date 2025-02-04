@@ -9,11 +9,24 @@ import MyInfo from "@/pages/Info/subpages/MyInfo";
 import Fitdex from "@/pages/Info/subpages/Fitdex";
 import History from "@/pages/Info/subpages/History";
 import Terms from "@/pages/Info/subpages/Terms";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
+import { useEffect, useState } from "react";
+import AuthRoute from "@/routes/AuthRoute";
+import Intro from "@/pages/Home/intro";
 const RoutesGroup = () => {
+    const { userData } = useSelector((state: RootState) => state.auth);
+    const [isLoggedIn, setLoggedIn] = useState(false);
+
+    useEffect(() => {
+        if(!!userData) setLoggedIn(true)
+    }, []);
 
     return (
         <Routes>
-            <Route path={"/"} element={<Home />} />
+
+            <Route path={"/hello"} element={<Intro/>}/>
+            <Route path={"/"} element={<AuthRoute isAuth={isLoggedIn} element={<Home/>} />}/>
             <Route path={"/login"} element={<Login/>}/>
             <Route path={"/test/icons"} element={<Icon/>}/>
             <Route path={"/info"} element={<Info/>}/>

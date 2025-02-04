@@ -1,9 +1,10 @@
 import { useNavigate } from "react-router-dom";
 
-import { styled } from "styled-components";
-import { theme } from "styles/theme";
-import Icon from "components/common/Icon/Icon";
-import { Button } from "components/common/Button/index";
+import styled from "styled-components";
+import { theme } from "@/styles/theme";
+import Icon from "@/components/Common/Icon";
+import Button from "@/components/Button";
+
 
 const IntroContainer = styled.main`
   height: 100%;
@@ -12,7 +13,7 @@ const IntroContainer = styled.main`
   justify-content: center;
   flex-direction: column;
   svg {
-    fill: ${({ theme }) => theme.color.primary};
+    fill: ${({ theme }) => theme.colors.primary};
   }
   button {
     position: fixed;
@@ -25,7 +26,7 @@ const Intro = () => {
 
     return (
         <IntroContainer>
-            <Icon icon="FitBuddy_3D" width={236} height={52} fill={theme.color.primary} />
+            <Icon icon="FitBuddy_3D" width={236} height={52} fill={theme.colors.primary} />
             <Button size="large" onClick={() => navigate("/login")}>
                 시작하기
             </Button>
