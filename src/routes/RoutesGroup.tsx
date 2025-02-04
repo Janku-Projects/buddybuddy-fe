@@ -13,7 +13,7 @@ const RoutesGroup = () => {
 
     return (
         <Routes>
-            <Route path={"/"} element={<Home />}/>
+            <Route path={"/"} element={<Home />} />
             <Route path={"/login"} element={<Login/>}/>
             <Route path={"/test/icons"} element={<Icon/>}/>
             <Route path={"/info"} element={<Info/>}/>
