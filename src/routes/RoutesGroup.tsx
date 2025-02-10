@@ -30,8 +30,9 @@ const RoutesGroup = () => {
     return (
         <Routes>
             <Route path="/intro" element={<Intro />} />
-            <Route path="/" element={<AuthRoute isAuth={isLoggedIn} element={<Home />} />} />
             <Route path="/login" element={<Login />} />
+
+            <Route path="/" element={<AuthRoute isAuth={isLoggedIn} element={<Home />} />} />
             <Route path="/test/icons" element={<Icon />} />
             <Route path="/info" element={<Info />} />
             <Route path="/setting" element={<Setting />} />

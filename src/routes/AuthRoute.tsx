@@ -11,7 +11,6 @@ interface iAuthRouteProps {
 }
 
 const AuthRoute = ({ element, isAuth }: iAuthRouteProps) => {
-    console.log("isAuth:: ", isAuth)
     return isAuth ? element: <Navigate to={"/intro"}/>
 };
 
