@@ -35,33 +35,51 @@ export const Subtitle = styled.ul`
 `;
 
 export const MidSect = styled.div`
-    margin-top: 1.5rem;
+    margin-top: 1rem;
     flex: 3;
 `;
 
 export const InputBox = styled.div`
-    margin: 1rem 0;
+    margin: 1.2rem 0 1.5rem 0;
+
+    display: flex;
+    flex-direction: column;
+    
     h2 {
-        // 글자
         font-size: ${({ theme }) => theme.fontSizes.xs};
         font-weight: ${({ theme }) => theme.fontWeights.medium};
-        line-height: 100%;
+        margin-bottom: 6px;
     }
     input {
-        margin-top: 16px;
         width: 100%;
-        border: 0.5px solid lightgray;
+        border: 1px solid ${({ theme }) => theme.colors.blueLight};
         height: 46px;
         border-radius: 8px;
-        margin-bottom: 10px;
-
-        // 글자
-        font-size: 16px;
-        font-weight: ${({ theme }) => theme.fontWeights.medium};
-        line-height: 130%;
         padding: 10px;
+        font-size: 16px;
+        transition: 0.2s;
+    }
+    input:focus {
+        border-color: ${({ theme }) => theme.colors.blueGrey30};
+        box-shadow: 0 0 5px ${({ theme }) => theme.colors.primaryLight};
+    }
+    .validation {
+        margin-top: 4px;
+        font-size: ${({ theme }) => theme.fontSizes.xs};
+        color: red;
     }
 `;
+
+export const CheckBox = styled.div`
+    margin: 4rem  0;
+    h2 {
+        font-size: ${({ theme }) => theme.fontSizes.xs};
+        font-weight: ${({ theme }) => theme.fontWeights.medium};
+        margin: 1rem 0;
+    }
+
+`;
+
 
 
 export const BottomSect = styled.div`
