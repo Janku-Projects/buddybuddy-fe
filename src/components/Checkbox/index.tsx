@@ -4,10 +4,11 @@ interface iCustomCheckbox {
     message: string;
     isChecked: boolean;
     onChecked: () => void
+    key: any;
 }
 
 
-const CustomCheckbox = ({message, isChecked, onChecked}) => {
+const CustomCheckbox = ({message, isChecked, onChecked}: iCustomCheckbox) => {
 
     return (
         <CheckboxContainer>
