@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const LoginWrapper = styled.div`
+export const MyInfoSetupWrapper = styled.div`
     overflow-y: auto;
     height: 100%;
     padding: 16px;
@@ -40,7 +40,7 @@ export const MidSect = styled.div`
 `;
 
 export const InputBox = styled.div`
-    margin: 1.2rem 0 1.5rem 0;
+    margin: 1.2rem 0 1rem 0;
 
     display: flex;
     flex-direction: column;
@@ -71,7 +71,7 @@ export const InputBox = styled.div`
 `;
 
 export const CheckBox = styled.div`
-    margin: 4rem  0;
+    margin: 3rem  0;
     h2 {
         font-size: ${({ theme }) => theme.fontSizes.xs};
         font-weight: ${({ theme }) => theme.fontWeights.medium};
@@ -80,11 +80,7 @@ export const CheckBox = styled.div`
 
 `;
 
-
-
 export const BottomSect = styled.div`
-
-
     button {
         width: 100%;
         height: 46px;
@@ -96,5 +92,33 @@ export const BottomSect = styled.div`
 
 `;
 
+////////////////////////////////////////////////////////////////
 
-export const ButtonWrap = styled.button``;
+export const MyBuddySetupWrapper = styled.div`
+    overflow-y: auto;
+    height: 100%;
+    padding: 16px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+`;
+
+
+
+
+export const BuddySect = styled.div`
+    margin-top: 1rem;
+    flex: 3;
+`;
+
+export const BuddyBox = styled.div`
+    border: 1px solid red;
+    height: 100%;
+`;
+
+
+
+
+
+
+
