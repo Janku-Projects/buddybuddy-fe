@@ -8,6 +8,7 @@ import {
 } from "@/pages/Info/subpages/Fitdex/Fitdex.styled";
 import { useEffect, useState } from "react";
 import { RootState } from "@/store/store";
+import {importAll} from "@/Util/util";
 
 const indexDescription = [
     "님들 저 하츄핑 MBTI 에서 하츄핑 나왔습니다 !! 이거 하츄핑 극장판 보러갈 각입니다! ",
@@ -15,13 +16,7 @@ const indexDescription = [
     "이상이는 이가 자주 상합니다. 보이는 두개의 이빨은 사실 이빨이 아니라, 눈입니다 !",
 ];
 
-const importAll = (r: any) => {
-    return r.keys().map((key: any) => {
-        const path = r(key);
-        const name = key.replace("./", "").replace(/\.(png|jpe?g|svg)$/, "");
-        return { path, name };
-    });
-};
+
 
 // @ts-ignore
 const images = importAll(require.context("src/assets/images/buddies/", false, /\.(png|jpe?g|svg)$/));

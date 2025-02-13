@@ -109,14 +109,12 @@ export const MyBuddySetupWrapper = styled.div`
 export const BuddySect = styled.div`
     margin-top: 1rem;
     flex: 3;
-    height: 100%;
-
+    
 
 `;
 
 export const BuddyBox = styled.div`
     margin: auto;
-    
 `;
 
 

@@ -15,6 +15,7 @@ import {
 import Button from "@/components/Button";
 import CustomCheckbox from "@/components/Checkbox";
 import CustomCarousel from "@/components/Carousel/CustomCarousel";
+import {importAll} from "@/Util/util";
 
 
 const inputArray = [
@@ -22,16 +23,8 @@ const inputArray = [
     { key: "buddyName", label: "버디 닉네임", placeholder: "버디 닉네임을 입력해주세요." },
 ];
 
-const imageList = [
-    `https://picsum.photos/id/${Math.floor(Math.random()) * 301}/200/300`,
-    `https://picsum.photos/id/${Math.floor(Math.random()) * 301}/200/300`,
-    `https://picsum.photos/id/${Math.floor(Math.random()) * 301}/200/300`,
-    `https://picsum.photos/id/${Math.floor(Math.random()) * 301}/200/300`,
-    `https://picsum.photos/id/${Math.floor(Math.random()) * 301}/200/300`,
-    `https://picsum.photos/id/${Math.floor(Math.random()) * 301}/200/300`,
-];
-
-
+// @ts-ignore
+const buddyList = importAll(require.context("src/assets/images/buddies/", false, /\.(png|jpe?g|svg)$/)).filter(buddy => buddy.name.includes("1"))
 
 
 const MyInfoSetup = ({ onSuccess }) => {
@@ -154,7 +147,7 @@ const MyBuddySetup = ({ onSuccess }) => {
             </TopSect>
             <BuddySect>
                 <BuddyBox>
-                    <CustomCarousel onChange={()=>{}} imageList={imageList}/>
+                    <CustomCarousel onChange={(index)=> console.log(index)} imageList={buddyList}/>
                 </BuddyBox>
 
             </BuddySect>

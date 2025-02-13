@@ -16,3 +16,11 @@ export const formatTime = (seconds: number) => {
     const secs = seconds % 60;
     return `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
 };
+
+export const importAll = (r: any) => {
+    return r.keys().map((key: any) => {
+        const path = r(key);
+        const name = key.replace("./", "").replace(/\.(png|jpe?g|svg)$/, "");
+        return { path, name };
+    });
+};
