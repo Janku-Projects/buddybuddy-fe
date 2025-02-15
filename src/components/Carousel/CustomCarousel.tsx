@@ -29,7 +29,6 @@ const CustomCarousel = ({onChange, imageList}:iCustomCarousel) => {
 
     useEffect(() => {
         setReady(true);
-        console.log(112, imageList)
         if(isReady){
             onChange(activeStep)
         }

@@ -15,7 +15,9 @@ import {
 import Button from "@/components/Button";
 import CustomCheckbox from "@/components/Checkbox";
 import CustomCarousel from "@/components/Carousel/CustomCarousel";
-import {importAll} from "@/Util/util";
+import { importAll } from "@/Util/util";
+import { useNavigate } from "react-router-dom";
+import { enqueueSnackbar } from "notistack";
 
 
 const inputArray = [
@@ -24,7 +26,7 @@ const inputArray = [
 ];
 
 // @ts-ignore
-const buddyList = importAll(require.context("src/assets/images/buddies/", false, /\.(png|jpe?g|svg)$/)).filter(buddy => buddy.name.includes("1"))
+const buddyList = importAll(require.context("src/assets/images/buddies/", false, /\.(png|jpe?g|svg)$/)).filter(buddy => buddy.name.includes("1"));
 
 
 const MyInfoSetup = ({ onSuccess }) => {
@@ -48,10 +50,7 @@ const MyInfoSetup = ({ onSuccess }) => {
 
     const handleNextStep = () => {
         // TODO:: 정보 local에 저장
-        localStorage.setItem("user", JSON.stringify(form))
-
-        // TODO:: 다음으로 이동
-
+        localStorage.setItem("user", JSON.stringify(form));
         onSuccess();
     };
 
@@ -119,14 +118,21 @@ const MyInfoSetup = ({ onSuccess }) => {
 };
 
 const MyBuddySetup = ({ onSuccess }) => {
-
-    const [buddyInfo, setBuddyInfo] = useState({});
+    const [buddyIndex, setBuddyIndex] = useState(-1);
 
     const handleNavigateDashboard = () => {
-
-
-
-        localStorage.setItem("buddy", JSON.stringify(buddyInfo))
+        const temp = localStorage.getItem("user");
+        if (!temp) {
+            enqueueSnackbar("저장된 유저 정보가 없습니다.", { variant: "error" });
+            return false;
+        }
+        const { buddyName } = JSON.parse(temp);
+        const buddyInfo = {
+            name: buddyName,
+            buddy: +buddyIndex
+        };
+        localStorage.setItem("buddy", JSON.stringify(buddyInfo));
+        onSuccess();
     };
 
 
@@ -147,7 +153,7 @@ const MyBuddySetup = ({ onSuccess }) => {
             </TopSect>
             <BuddySect>
                 <BuddyBox>
-                    <CustomCarousel onChange={(index)=> console.log(index)} imageList={buddyList}/>
+                    <CustomCarousel onChange={(index) => setBuddyIndex(index)} imageList={buddyList}/>
                 </BuddyBox>
 
             </BuddySect>
@@ -168,6 +174,8 @@ const MyBuddySetup = ({ onSuccess }) => {
 
 const Login = () => {
     const [isMyInfoSetup, setMyInfoSetup] = useState(false);
+    const navigate = useNavigate();
+
 
     // FUNC:: handleSuccessInfoSetup
     const handleSuccessInfoSetup = () => {
@@ -176,14 +184,10 @@ const Login = () => {
 
     // FUNC:: handleSuccessBuddySetup
     const handleSuccessBuddySetup = () => {
+        navigate("/")
+    };
 
-    }
 
-
-    // FUNC:: MOUNTED
-    useEffect(() => {
-
-    }, []);
 
     return (
         isMyInfoSetup
