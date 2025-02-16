@@ -57,7 +57,7 @@ const MyInfoSetup = ({ onSuccess }) => {
     return (
         <MyInfoSetupWrapper>
             <TopSect>
-                <Title>사용할 정보를 입력해주세요!</Title>
+                <Title>사용자정보</Title>
                 <Subtitle>
                     <li>모든 정보는 개인 기기에 저장됩니다.</li>
                     <li>데이터를 서버에 저장하지 않습니다.</li>
@@ -139,7 +139,7 @@ const MyBuddySetup = ({ onSuccess }) => {
     return (
         <MyBuddySetupWrapper>
             <TopSect>
-                <Title>아래 내용을 확인해주세요.</Title>
+                <Title>버디선택</Title>
                 <Subtitle>
                     <li>처음 선택한 버디는 나중에 변경할 수 있어요.</li>
                     <li>버디는 경험치를 쌓으면 성장하며, 특정 레벨에서 모습이 변화해요.</li>
@@ -173,7 +173,7 @@ const MyBuddySetup = ({ onSuccess }) => {
 
 
 const Login = () => {
-    const [isMyInfoSetup, setMyInfoSetup] = useState(false);
+    const [isMyInfoSetup, setMyInfoSetup] = useState(true);
     const navigate = useNavigate();
 
 

@@ -8,7 +8,8 @@ import {
 } from "@/pages/Info/subpages/Fitdex/Fitdex.styled";
 import { useEffect, useState } from "react";
 import { RootState } from "@/store/store";
-import {importAll} from "@/Util/util";
+import { importAll } from "@/Util/util";
+import { enqueueSnackbar } from "notistack";
 
 const indexDescription = [
     "님들 저 하츄핑 MBTI 에서 하츄핑 나왔습니다 !! 이거 하츄핑 극장판 보러갈 각입니다! ",
@@ -17,10 +18,8 @@ const indexDescription = [
 ];
 
 
-
 // @ts-ignore
 const images = importAll(require.context("src/assets/images/buddies/", false, /\.(png|jpe?g|svg)$/));
-console.log(112, images)
 
 const Fitdex = () => {
     const { userData } = useSelector((state: RootState) => state.auth);
@@ -31,12 +30,26 @@ const Fitdex = () => {
     const [myBuddies, setMyBuddies] = useState<string[]>([]);
 
 
-    const fetchBuddyDictionary = async () => {
+    const fetchBuddyDictionary = () => {
         if (!userData) return;
+        const localUser = JSON.parse(localStorage.getItem("user") ?? null);
+        const localBuddy = JSON.parse(localStorage.getItem("buddy") ?? null);
+        console.log("localUser:: ", localUser)
+        console.log("localBuddy:: ", localBuddy);
+        // 로그인 문제
+        if(!localUser || !localBuddy){
+            enqueueSnackbar("로그인을 다시해주새요.", {variant: "error"})
+        }
         // const res = await getDictionary({ uuid: userData.uuid });
         // if (res.status === 200) {
         //     setMyBuddies(res.data);
         // }
+    };
+
+    const getCharacterName = (fileNM: string) => {
+        if (fileNM.includes("chicken")) return "삐약이";
+        if (fileNM.includes("otter")) return "수달이";
+        if (fileNM.includes("monster")) return "이상이";
     };
 
     useEffect(() => {
@@ -46,16 +59,15 @@ const Fitdex = () => {
                 const level = fileNM.split("_lv_")[0];
 
                 // 이름 설정
-                if (fileNM.includes("chicken")) item.characterName = "삐약이";
-                if (fileNM.includes("otter")) item.characterName = "수달이";
-                if (fileNM.includes("monster")) item.characterName = "이상이";
+                item.characterName = getCharacterName(fileNM);
 
                 // myBuddies에 포함된 친구만 보여주기
                 const array = item.name.split("/");
-                if (array.length === 1) {
-                    return myBuddies.map((buddy) => buddy.toLowerCase()).includes(level.toLowerCase());
-                }
-                return false;
+                return true;
+                // if (array.length === 1) {
+                //     return myBuddies.map((buddy) => buddy.toLowerCase()).includes(level.toLowerCase());
+                // }
+                // return false;
             })
             .reduce((accumulator: any[], currentValue: any, index: number) => {
                 if (index % 3 === 0) {
@@ -69,6 +81,9 @@ const Fitdex = () => {
         // @ts-ignore
         setBuddies([...modifiedBuddies]);
     }, [myBuddies]);
+
+
+    // MOUNTED
     useEffect(() => {
         fetchBuddyDictionary();
     }, []);
