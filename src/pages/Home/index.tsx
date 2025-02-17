@@ -21,7 +21,7 @@ const Home = () => {
                 isReady && (
                     <>
                         <ActionNav style={{zIndex: 100}} actionList={TopActionLabel(actionHandler)}/>
-                        <button onClick={handleModel}>CLICK</button>
+                        {/*<button onClick={handleModel}>CLICK</button>*/}
                         {/*<button onClick={handleBuddyData}>CLICK</button>*/}
                         <Buddy />
                         <ActionNav style={{zIndex: 100}} actionList={BottomActionLabel(actionHandler)}/>

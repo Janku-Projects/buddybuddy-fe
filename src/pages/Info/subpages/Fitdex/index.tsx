@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { RootState } from "@/store/store";
 import { importAll } from "@/Util/util";
 import { enqueueSnackbar } from "notistack";
+import { useNavigate } from "react-router-dom";
 
 const indexDescription = [
     "님들 저 하츄핑 MBTI 에서 하츄핑 나왔습니다 !! 이거 하츄핑 극장판 보러갈 각입니다! ",
@@ -28,7 +29,7 @@ const Fitdex = () => {
     const [buddies, setBuddies] = useState<[]>([]);
     const [fileName, setFileName] = useState<string>("");
     const [myBuddies, setMyBuddies] = useState<string[]>([]);
-
+    const navigate = useNavigate()
 
     const fetchBuddyDictionary = () => {
         if (!userData) return;
@@ -38,7 +39,8 @@ const Fitdex = () => {
         console.log("localBuddy:: ", localBuddy);
         // 로그인 문제
         if(!localUser || !localBuddy){
-            enqueueSnackbar("로그인을 다시해주새요.", {variant: "error"})
+            enqueueSnackbar("로그인을 다시해주새요.", {variant: "error"});
+            navigate("/login")
         }
         // const res = await getDictionary({ uuid: userData.uuid });
         // if (res.status === 200) {
