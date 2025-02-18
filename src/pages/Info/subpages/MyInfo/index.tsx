@@ -23,9 +23,16 @@ const MyInfo = () => {
         <MyInfoWrapper>
             <MyInfoContainer>
                 <NicknameSect>
+                    <TitleBox>닉네임</TitleBox>
+
                     <InputBox></InputBox>
                 </NicknameSect>
 
+
+                <NicknameSect>
+                    <TitleBox>버디</TitleBox>
+                    <InputBox/>
+                </NicknameSect>
 
                 <CellphoneSect>
                     <TitleBox>휴대폰 번호</TitleBox>
