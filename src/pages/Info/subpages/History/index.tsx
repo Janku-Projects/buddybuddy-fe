@@ -7,15 +7,14 @@ import { dummyActivities } from "@/constants/dummy/data";
 import Icon from "@/components/Common/Icon";
 import dayjs from "dayjs";
 
-
 interface HistoryListComponentProps {
-    historyList?: any[];
+    historyList: any[];
 }
 
 const renderIcon = (type: string) => {
     switch (type) {
         case "EXERCISE":
-            return <Icon icon="LiftingWeights" style={{border: 'none'}} />;
+            return <Icon icon="LiftingWeights" style={{ border: 'none' }} />;
         case "SHOWER":
             return <Icon icon="Bathtub" />;
         case "SLEEP":
@@ -30,6 +29,7 @@ const renderIcon = (type: string) => {
             return null;
     }
 };
+
 const renderAction = (type: string) => {
     switch (type) {
         case "EXERCISE":
@@ -45,35 +45,26 @@ const renderAction = (type: string) => {
         case "RECOVERY":
             return "피로도 회복";
         default:
-            return null;
+            return "알 수 없음";
     }
 };
 
-
-const SingleHistoryComponent = ({history}) => {
-    const [item, _] = useState(history)
-
+const SingleHistoryComponent = ({ history }) => {
     return (
         <ListItem>
             <div className="left">
-                <IconBox>{renderIcon(item.action)}</IconBox>
+                <IconBox>{renderIcon(history.action)}</IconBox>
                 <div className="text">
-                    <span className="action">{renderAction(item.action)}</span>
-                    <span className="date">{dayjs(item.start).format("MM월 DD일 HH:mm")}</span>
+                    <span className="action">{renderAction(history.action)}</span>
+                    <span className="date">{dayjs(history.start).format("MM월 DD일 HH:mm")}</span>
                 </div>
             </div>
             <div className="right">
-                {item.mp && (
-                    <span className="mp">
-                  경험치 {item.mp > 0 ? "+" : ""}
-                        {item.mp}%
-                </span>
+                {history.mp && (
+                    <span className="mp">경험치 {history.mp > 0 ? "+" : ""}{history.mp}%</span>
                 )}
-                {item.hp && (
-                    <span className="hp">
-                  피로도 {item.hp > 0 ? "+" : ""}
-                        {item.hp}%
-                </span>
+                {history.hp && (
+                    <span className="hp">피로도 {history.hp > 0 ? "+" : ""}{history.hp}%</span>
                 )}
             </div>
         </ListItem>
@@ -84,9 +75,7 @@ const HistoryListComponent = ({ historyList }: HistoryListComponentProps) => {
     return (
         <ul>
             {historyList.map((history, index) => (
-                <div key={index}>
-                    <SingleHistoryComponent history={history}/>
-                </div>
+                <SingleHistoryComponent key={index} history={history} />
             ))}
         </ul>
     );
@@ -94,29 +83,23 @@ const HistoryListComponent = ({ historyList }: HistoryListComponentProps) => {
 
 const History = () => {
     const dispatch = useDispatch();
-    const [historyList, setHistoryList] = useState([]);
+    const [historyList, setHistoryList] = useState<any[]>([]);
 
     useEffect(() => {
-        setHistoryList(dummyActivities);
+        const storedHistory = localStorage.getItem("history");
+        setHistoryList(storedHistory ? JSON.parse(storedHistory) : dummyActivities);
     }, []);
 
     useEffect(() => {
         dispatch(setHeader("행동기록"));
-
         return () => {
             dispatch(setHeader(""));
-        }
+        };
     }, [dispatch]);
-
 
     return (
         <>
-            {
-                historyList.length > 0
-                    ? <HistoryListComponent historyList={historyList}/>
-                    : <EmptyData/>
-            }
-
+            {historyList.length > 0 ? <HistoryListComponent historyList={historyList} /> : <EmptyData />}
         </>
     );
 };

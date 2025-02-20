@@ -8,6 +8,7 @@ import {
     TitleBox,
     EmailSect, FooterSect, CellphoneSect
 } from "@/pages/Info/subpages/MyInfo/MyInfo.styled";
+import { enqueueSnackbar } from "notistack";
 
 const MyInfo = () => {
     const dispatch = useDispatch();
@@ -34,6 +35,8 @@ const MyInfo = () => {
     const handleConfirm = () => {
         console.log("저장된 데이터:", formData);
         // 저장 로직 추가 가능
+        localStorage.setItem("user", JSON.stringify(formData));
+        enqueueSnackbar("개인정보를 수정했습니다." , {variant: "success"});
     };
 
     return (
