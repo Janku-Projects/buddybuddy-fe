@@ -1,13 +1,15 @@
 import Dexie, { Table } from "dexie";
-import {Buddy} from "@/db/dexieDB.def";
+import {Buddy, User} from "@/db/dexieDB.def";
 
 class DexieDB extends Dexie {
     buddy !: Table<Buddy>
+    user !: Table<User>
 
     constructor() {
         super("dexieDB");
         this.version(1).stores({
-            buddy: "++id, name, exp",
+            user: "++userId, name",
+            buddy: "++buddyId, name"
         });
     }
 }

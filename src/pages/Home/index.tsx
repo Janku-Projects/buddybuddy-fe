@@ -24,7 +24,6 @@ const Home = () => {
                         <ActionNav style={{zIndex: 100}} actionList={TopActionLabel(actionHandler)}/>
                         {/*<button onClick={handleModel}>CLICK</button>*/}
                         {/*<button onClick={handleBuddyData}>CLICK</button>*/}
-                        @<Test/>@
                         <Buddy />
                         <ActionNav style={{zIndex: 100}} actionList={BottomActionLabel(actionHandler)}/>
                     </>

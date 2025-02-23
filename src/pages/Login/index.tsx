@@ -1,5 +1,7 @@
 import LoginHandler from "@/pages/Login/Login.func";
 import { useEffect, useState } from "react";
+import { dexieDB } from "@/db/dexieDB";
+
 import {
     BottomSect, CheckBox,
     InputBox,
@@ -18,11 +20,13 @@ import CustomCarousel from "@/components/Carousel/CustomCarousel";
 import { importAll } from "@/Util/util";
 import { useNavigate } from "react-router-dom";
 import { enqueueSnackbar } from "notistack";
+import dayjs from "dayjs";
+import { User } from "@/db/dexieDB.def";
 
 
 const inputArray = [
     { key: "nickname", label: "닉네임", placeholder: "닉네임을 입력해주세요." },
-    { key: "buddyName", label: "버디 닉네임", placeholder: "버디 닉네임을 입력해주세요." },
+    // { key: "buddyName", label: "버디 닉네임", placeholder: "버디 닉네임을 입력해주세요." },
 ];
 
 // @ts-ignore
@@ -31,7 +35,7 @@ const buddyList = importAll(require.context("src/assets/images/buddies/", false,
 
 const MyInfoSetup = ({ onSuccess }) => {
     const { isLoggedIn, navigate } = LoginHandler();
-    const [form, setForm] = useState<{ nickname: string, buddyName: string }>({ nickname: "", buddyName: "" });
+    const [form, setForm] = useState<{ nickname: string }>({ nickname: "" });
     const [isError, setError] = useState(false);
     const [agreements, setAgreements] = useState([false, false, false]);
 
@@ -50,7 +54,25 @@ const MyInfoSetup = ({ onSuccess }) => {
 
     const handleNextStep = () => {
         // TODO:: 정보 local에 저장
-        localStorage.setItem("user", JSON.stringify(form));
+        if(form?.nickname.length < 1) return false;
+
+        const currentDate = new Date();
+        const formattedDate = currentDate.toLocaleString("ko-KR", {
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+        });
+
+        const payload: User = {
+            name: form?.nickname ?? "", // 기본값 설정
+            createdDate: formattedDate,
+            lastLoginInDate: formattedDate,
+            currentBuddyId: 0,
+        }
+        // dexieDB.buddy.add({ exp: "0", name: "Alice"});
+
+        console.log(112, payload)
+        dexieDB.user.add(payload);
         onSuccess();
     };
 
@@ -71,7 +93,7 @@ const MyInfoSetup = ({ onSuccess }) => {
             <MidSect>
                 {
                     inputArray.map((item, index) => (
-                        <InputBox key={index}>
+                        <InputBox key={item.key}>
                             <h2>{item.label}</h2>
                             <input
                                 id={item.key}
