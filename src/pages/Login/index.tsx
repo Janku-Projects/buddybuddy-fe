@@ -70,8 +70,6 @@ const MyInfoSetup = ({ onSuccess }) => {
             currentBuddyId: 0,
         }
         // dexieDB.buddy.add({ exp: "0", name: "Alice"});
-
-        console.log(112, payload)
         dexieDB.user.add(payload);
         onSuccess();
     };
@@ -154,6 +152,8 @@ const MyBuddySetup = ({ onSuccess }) => {
             buddy: +buddyIndex
         };
         localStorage.setItem("buddy", JSON.stringify(buddyInfo));
+        dexieDB.buddy.add(buddyInfo);
+
         onSuccess();
     };
 
