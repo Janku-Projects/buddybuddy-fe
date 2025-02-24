@@ -52,7 +52,7 @@ const MyInfoSetup = ({ onSuccess }) => {
         setForm((prev) => ({ ...prev, [id]: value }));
     };
 
-    const handleNextStep = () => {
+    const handleNextStep = async () => {
         // TODO:: 정보 local에 저장
         if(form?.nickname.length < 1) return false;
 
@@ -70,7 +70,8 @@ const MyInfoSetup = ({ onSuccess }) => {
             currentBuddyId: 0,
         }
         // dexieDB.buddy.add({ exp: "0", name: "Alice"});
-        dexieDB.user.add(payload);
+        const userId = await dexieDB.user.add(payload);
+        localStorage.setItem("userId", userId)
         onSuccess();
     };
 
@@ -140,20 +141,25 @@ const MyInfoSetup = ({ onSuccess }) => {
 const MyBuddySetup = ({ onSuccess }) => {
     const [buddyIndex, setBuddyIndex] = useState(-1);
 
-    const handleNavigateDashboard = () => {
+    const handleNavigateDashboard = async () => {
         const temp = localStorage.getItem("user");
         if (!temp) {
             enqueueSnackbar("저장된 유저 정보가 없습니다.", { variant: "error" });
             return false;
         }
         const { buddyName } = JSON.parse(temp);
+        const userId = localStorage.getItem("userId") || null;
+        if(!userId) return false;
+        const userInfo = await dexieDB.user.get(userId);
+
         const buddyInfo = {
             name: buddyName,
-            buddy: +buddyIndex
+            buddy: +buddyIndex,
+            exp: "0",
+            createBy: userInfo.userId
         };
-        localStorage.setItem("buddy", JSON.stringify(buddyInfo));
+        // localStorage.setItem("buddy", JSON.stringify(buddyInfo));
         dexieDB.buddy.add(buddyInfo);
-
         onSuccess();
     };
 
@@ -212,7 +218,7 @@ const Login = () => {
 
 
     return (
-        isMyInfoSetup
+        !isMyInfoSetup
             ? <MyInfoSetup onSuccess={handleSuccessInfoSetup}/>
             : <MyBuddySetup onSuccess={handleSuccessBuddySetup}/>
     );
