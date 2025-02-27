@@ -29,6 +29,12 @@ const inputArray = [
     // { key: "buddyName", label: "버디 닉네임", placeholder: "버디 닉네임을 입력해주세요." },
 ];
 
+const agreementArray = [
+    "모든 정보는 개인기기에 저장",
+    "데이터를 따로 서버에 저장 안함",
+    "앱 삭제시, 모든 데이터 삭제"
+]
+
 // @ts-ignore
 const buddyList = importAll(require.context("src/assets/images/buddies/", false, /\.(png|jpe?g|svg)$/)).filter(buddy => buddy.name.includes("1"));
 
@@ -116,7 +122,7 @@ const MyInfoSetup = ({ onSuccess }) => {
                                 key={index}
                                 isChecked={isChecked}
                                 onChecked={() => onToggleAgreement(index)}
-                                message={`약관 ${index + 1} 동의`}
+                                message={`약관 ${index + 1}. ${agreementArray[index]}`}
                             />
                         </div>
                     ))}
@@ -138,28 +144,28 @@ const MyInfoSetup = ({ onSuccess }) => {
     );
 };
 
-const MyBuddySetup = ({ onSuccess }) => {
+const MyBuddySetup =  ({ onSuccess }) => {
     const [buddyIndex, setBuddyIndex] = useState(-1);
+    const [nickName, setBuddyName] = useState("");
 
     const handleNavigateDashboard = async () => {
-        const temp = localStorage.getItem("user");
-        if (!temp) {
+        const userId = localStorage.getItem("userId") || null;
+        if (!userId) {
             enqueueSnackbar("저장된 유저 정보가 없습니다.", { variant: "error" });
             return false;
         }
-        const { buddyName } = JSON.parse(temp);
-        const userId = localStorage.getItem("userId") || null;
-        if(!userId) return false;
-        const userInfo = await dexieDB.user.get(userId);
+        const userInfo = await dexieDB.user.get(+userId);
+        console.log("userInfo:: ", userInfo)
 
         const buddyInfo = {
-            name: buddyName,
+            name: nickName,
             buddy: +buddyIndex,
             exp: "0",
             createBy: userInfo.userId
         };
         // localStorage.setItem("buddy", JSON.stringify(buddyInfo));
-        dexieDB.buddy.add(buddyInfo);
+        const buddyId = await dexieDB.buddy.add(buddyInfo);
+        await dexieDB.user.update(2, {currentBuddyId: buddyId})
         onSuccess();
     };
 
@@ -171,7 +177,6 @@ const MyBuddySetup = ({ onSuccess }) => {
                 <Subtitle>
                     <li>처음 선택한 버디는 나중에 변경할 수 있어요.</li>
                     <li>버디는 경험치를 쌓으면 성장하며, 특정 레벨에서 모습이 변화해요.</li>
-                    <li>레벨업한 모습은 일정 조건을 만족해야 유지될 수 있어요.</li>
                     <li>모든 데이터는 개인 기기에 저장되며, 앱 삭제 시 함께 삭제됩니다.</li>
                     <li>
                         앱을 삭제할 경우, 데이터가 사라지니,
@@ -179,6 +184,16 @@ const MyBuddySetup = ({ onSuccess }) => {
                     </li>
                 </Subtitle>
             </TopSect>
+
+            <InputBox key={1}>
+                <input
+                    id={"nickName"}
+                    type="text"
+                    value={nickName}
+                    onChange={({target: {value}})=>setBuddyName(value)}
+                    placeholder={"함께할 친구의 이름을 정해주세요."}
+                />
+            </InputBox>
             <BuddySect>
                 <BuddyBox>
                     <CustomCarousel onChange={(index) => setBuddyIndex(index)} imageList={buddyList}/>
@@ -192,7 +207,7 @@ const MyBuddySetup = ({ onSuccess }) => {
                     size="large"
                     onClick={handleNavigateDashboard}
                 >
-                    버디 보러가기
+                    함께하기
                 </Button>
             </BottomSect>
         </MyBuddySetupWrapper>
