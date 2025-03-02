@@ -155,7 +155,6 @@ const MyBuddySetup =  ({ onSuccess }) => {
             return false;
         }
         const userInfo = await dexieDB.user.get(+userId);
-        console.log("userInfo:: ", userInfo, buddyIndex)
 
         const buddyInfo = {
             originalId: +buddyIndex + 1,
@@ -164,7 +163,7 @@ const MyBuddySetup =  ({ onSuccess }) => {
             createBy: userInfo.userId,
         };
         const buddyId = await dexieDB.buddy.add(buddyInfo);
-        await dexieDB.user.update(2, {currentBuddyId: buddyId})
+        await dexieDB.user.update(userInfo.userId, {currentBuddyId: +buddyId})
         onSuccess();
     };
 

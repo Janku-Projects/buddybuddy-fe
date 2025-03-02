@@ -2,28 +2,19 @@ import HomeHandler from "@/pages/Home/Home.func";
 import Buddy from "@/components/Buddy";
 import { ActionNav } from "@/components/ActionNav";
 import { BottomActionLabel, TopActionLabel } from "@/pages/Home/Home.def";
-import Test from "@/pages/Test";
+import useHomeFunc from "@/pages/Home/Home.func";
 
 
 const Home = () => {
-    const {
-        isReady,
-        actionHandler// 화면 ready
-    } = HomeHandler();
-
-
-
-
+    const homeFunc = useHomeFunc();
     return (
         <>
             {
-                isReady && (
+                homeFunc.isReady && (
                     <>
-                        <ActionNav style={{zIndex: 100}} actionList={TopActionLabel(actionHandler)}/>
-                        {/*<button onClick={handleModel}>CLICK</button>*/}
-                        {/*<button onClick={handleBuddyData}>CLICK</button>*/}
-                        <Buddy />
-                        <ActionNav style={{zIndex: 100}} actionList={BottomActionLabel(actionHandler)}/>
+                        <ActionNav style={{zIndex: 100}} actionList={TopActionLabel(homeFunc.actionHandler)}/>
+                        <Buddy buddyInfo={homeFunc.buddy}/>
+                        <ActionNav style={{zIndex: 100}} actionList={BottomActionLabel(homeFunc.actionHandler)}/>
                     </>
                 )
 

@@ -6,8 +6,10 @@ import StatusLabel from "src/components/StatusLabel";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import BuddyTimer from "@/components/Buddy/BuddyTimer";
-
-const Buddy: FC<any> = ({  isShowLabel = true, level = 1}) => {
+const Buddy = ({
+                   isShowLabel = true,
+                   buddyInfo
+               }) => {
     const [height, setHeight] = useState("55vh");
     const { model } = useSelector((state: RootState) => state.model);
     const { action } = useSelector((state: RootState) => state.action);
@@ -18,10 +20,11 @@ const Buddy: FC<any> = ({  isShowLabel = true, level = 1}) => {
         return "62vh";
     };
 
+    // FUNC:: MOUNTED
     useEffect(() => {
+        console.log(999, model);
         setHeight(calculateHeight());
     }, []);
-
 
 
     return (
@@ -37,7 +40,7 @@ const Buddy: FC<any> = ({  isShowLabel = true, level = 1}) => {
             {/*{action.toString()}*/}
 
             {/*SECT: 레벨과 이름*/}
-            {isShowLabel && <InfoLabel/>}
+            {isShowLabel && <InfoLabel buddyInfo={buddyInfo}/>}
         </BuddyWrapper>
     );
 };

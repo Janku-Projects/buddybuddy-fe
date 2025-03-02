@@ -9,13 +9,13 @@ interface iLabelProps extends generalInterface {
 
 }
 
-const InfoLabel: FC<iLabelProps> = ({ style }) => {
+const InfoLabel = ({ style = {}, buddyInfo }) => {
     const { buddy } = useSelector((state: RootState) => state.buddy);
     const [level, setLevel] = useState<number>(0);
 
     // SECT: Calculate EXP to Level
     const convertExpToLevel = () => {
-        const tempLevel = ~~(buddy.exp / 100);
+        const tempLevel = ~~(buddyInfo.exp / 100);
         if (tempLevel > 2) {
             setLevel(3);
         } else if (tempLevel > 1) {
@@ -33,7 +33,7 @@ const InfoLabel: FC<iLabelProps> = ({ style }) => {
     return (
         <InfoLabelBox style={style}>
             <span className="level">LV {level}</span>
-            <span className="name">{buddy.name}</span>
+            <span className="name">{buddyInfo.name}</span>
         </InfoLabelBox>
     );
 };

@@ -14,30 +14,41 @@ const HomeHandler = () => {
 
     const { action } = useSelector((state: RootState) => state.action);
 
-    const handleModel = () => {
-        setIsLoading(true);
-        dispatch(setModel("monster_lv_1"));
-
+    const handleModel = (buddy: any) => {
+        console.log("handleModel:: ", buddy?.originalId)
+        // setIsLoading(true);
+        let tempBuddyName = null;
+        switch ( buddy?.originalId){
+            case 1:
+                tempBuddyName="chicken_lv_1";
+                break;
+            case 2:
+                tempBuddyName="monster_lv_1";
+                break;
+            case 3:
+                tempBuddyName="=otter_lv_1";
+                break;
+        }
+        dispatch(setModel(tempBuddyName));
         setIsLoading(false);
     }
 
     const handleBuddyData = () => {
         dispatch(setGainBuddyInfo({hunger: 10}));
-
     }
 
 
     const getBuddy = async () => {
         const payload = {};
-        const userId = localStorage.getItem("userId");
+        const userId: number = +localStorage.getItem("userId");
         const userInfo = await dexieDB.user.get(userId);
-        console.log("userInfo:: ", userInfo)
-        if(!userInfo || !userInfo?.currentBuddyId){
-            return false;
-        }
-        const buddyInfo = await dexieDB.buddy?.get(userInfo?.currentBuddyId)
-        console.log(112, buddyInfo)
+        const buddyInfo = await dexieDB.buddy?.get(+userInfo?.currentBuddyId);
+        setBuddy(buddyInfo);
+        handleModel(buddyInfo);
+        setReady(true); // 화면 준비
     };
+
+
 
     const actionHandler = (params) => {
         console.log("current action : ", action);
@@ -55,15 +66,8 @@ const HomeHandler = () => {
     // SECT: MOUNTED > Buddy check
     useEffect(() => {
         dispatch(setHeader("")); // 헤더 확인
-
-        // if (!buddy.buddyInfo || !buddy.buddy) {
         getBuddy();
-        // }
 
-
-
-
-        setReady(true); // 화면 준비
     }, []);
 
 
@@ -72,7 +76,8 @@ const HomeHandler = () => {
         isReady,
         handleBuddyData,
         handleModel,
-        actionHandler
+        actionHandler,
+        buddy, setBuddy,
     };
 };
 
