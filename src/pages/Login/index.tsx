@@ -145,7 +145,7 @@ const MyInfoSetup = ({ onSuccess }) => {
 };
 
 const MyBuddySetup =  ({ onSuccess }) => {
-    const [buddyIndex, setBuddyIndex] = useState(-1);
+    const [buddyIndex, setBuddyIndex] = useState(0);
     const [nickName, setBuddyName] = useState("");
 
     const handleNavigateDashboard = async () => {
@@ -155,15 +155,14 @@ const MyBuddySetup =  ({ onSuccess }) => {
             return false;
         }
         const userInfo = await dexieDB.user.get(+userId);
-        console.log("userInfo:: ", userInfo)
+        console.log("userInfo:: ", userInfo, buddyIndex)
 
         const buddyInfo = {
+            originalId: +buddyIndex + 1,
             name: nickName,
-            buddy: +buddyIndex,
             exp: "0",
-            createBy: userInfo.userId
+            createBy: userInfo.userId,
         };
-        // localStorage.setItem("buddy", JSON.stringify(buddyInfo));
         const buddyId = await dexieDB.buddy.add(buddyInfo);
         await dexieDB.user.update(2, {currentBuddyId: buddyId})
         onSuccess();
@@ -233,7 +232,7 @@ const Login = () => {
 
 
     return (
-        !isMyInfoSetup
+        isMyInfoSetup
             ? <MyInfoSetup onSuccess={handleSuccessInfoSetup}/>
             : <MyBuddySetup onSuccess={handleSuccessBuddySetup}/>
     );

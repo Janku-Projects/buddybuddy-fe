@@ -5,10 +5,11 @@ import { setHeader, setIsLoading } from "@/store/slices/uiSlice";
 import { setAction } from "@/store/slices/actionSlice";
 import { setModel } from "@/store/slices/modelSlice";
 import { setGainBuddyInfo } from "@/store/slices/buddySlice";
+import { dexieDB } from "@/db/dexieDB";
 
 const HomeHandler = () => {
     const dispatch = useDispatch();
-    const buddy = useSelector((state: RootState) => state.buddy);
+    const [buddy, setBuddy] = useState<any>(null);
     const [isReady, setReady] = useState<boolean>(false);
 
     const { action } = useSelector((state: RootState) => state.action);
@@ -26,10 +27,16 @@ const HomeHandler = () => {
     }
 
 
-    const getBuddy = () => {
+    const getBuddy = async () => {
         const payload = {};
-
-        return payload;
+        const userId = localStorage.getItem("userId");
+        const userInfo = await dexieDB.user.get(userId);
+        console.log("userInfo:: ", userInfo)
+        if(!userInfo || !userInfo?.currentBuddyId){
+            return false;
+        }
+        const buddyInfo = await dexieDB.buddy?.get(userInfo?.currentBuddyId)
+        console.log(112, buddyInfo)
     };
 
     const actionHandler = (params) => {
@@ -49,9 +56,13 @@ const HomeHandler = () => {
     useEffect(() => {
         dispatch(setHeader("")); // 헤더 확인
 
-        if (!buddy.buddyInfo || !buddy.buddy) {
-            const buddy = getBuddy();
-        }
+        // if (!buddy.buddyInfo || !buddy.buddy) {
+        getBuddy();
+        // }
+
+
+
+
         setReady(true); // 화면 준비
     }, []);
 

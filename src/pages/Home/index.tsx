@@ -8,8 +8,6 @@ import Test from "@/pages/Test";
 const Home = () => {
     const {
         isReady,
-        handleModel,
-        handleBuddyData,
         actionHandler// 화면 ready
     } = HomeHandler();
 

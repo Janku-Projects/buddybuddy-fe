@@ -9,11 +9,14 @@ export interface User {
 
 // SECT: 로그인 한 사용자의 버디 정보
 export interface Buddy {
-    buddyId?: number;
-    name: string;
-    exp: string;
-    createBy?: number;
+    buddyId?: number; // 버디 아이디: PK
+    originalId: number; // 버디 고유 아이디
+    name: string; // 버디 닉네임
+    exp: string; // 현재 가지고 있는 EXP
+    createBy?: number; // 주인 ID
 }
+
+
 
 
 
