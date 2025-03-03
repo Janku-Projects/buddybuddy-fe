@@ -3,7 +3,8 @@ import { generalInterface } from "@/Util/util";
 import { FC } from "react";
 import Icon from "@/components/Common/Icon";
 import { setGainBuddyInfo } from "@/store/slices/buddySlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 
 
 interface iActionNavProps extends generalInterface {
@@ -12,10 +13,13 @@ interface iActionNavProps extends generalInterface {
 
 export const ActionNav: FC<iActionNavProps> = ({ actionList }) => {
     const dispatch = useDispatch();
+    const { action } = useSelector((state: RootState) => state.action);
+
 
     const onClickAction = (payload) => {
+        console.log("action:: ", action)
         // TODO:: []로 나누기
-        console.log(112, payload.gain);
+
         if (payload.gain) {
             const { key, value } = payload.gain;
             dispatch(setGainBuddyInfo({ [key]: value }));

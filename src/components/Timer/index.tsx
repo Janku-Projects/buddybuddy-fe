@@ -28,9 +28,7 @@ const Timer: FC<iTimer> = ({ onEnd, min, second }) => {
             onTimerEnd();
             onEnd();
         }
-
         return () => clearInterval(timer);
-
     }, [timeLeft]);
 
 

@@ -29,17 +29,17 @@ const Buddy = ({
 
     return (
         <BuddyWrapper>
-            {/*SECT: 상태 호출*/}
+            {/*COMP: 상태 호출*/}
             {action === 6 && <StatusLabel/>}
 
-            {/*SECT: 액션 중일 때, 타이머*/}
+            {/*COMP: 액션 중일 때, 타이머*/}
             {(action !== 0 && action !== 6) && <BuddyTimer/>}
 
-            {/*SECT: 모델 */}
+            {/*COMP: 모델 */}
             <Three fileName={model.name} style={{ height }}/>
             {/*{action.toString()}*/}
 
-            {/*SECT: 레벨과 이름*/}
+            {/*COMP: 레벨과 이름*/}
             {isShowLabel && <InfoLabel buddyInfo={buddyInfo}/>}
         </BuddyWrapper>
     );

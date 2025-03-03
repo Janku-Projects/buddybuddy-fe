@@ -6,6 +6,7 @@ import { clearAction, eAction, setAction } from "@/store/slices/actionSlice";
 import Timer from "@/components/Timer";
 import { RootState } from "@/store/store";
 import { BottomActionLabel, TopActionLabel } from "@/pages/Home/Home.def";
+import { dexieDB } from "@/db/dexieDB";
 
 interface iTimerProps extends generalInterface {
 
@@ -18,6 +19,7 @@ const combined = [...a, ...b];
 const BuddyTimer: FC<iTimerProps> = ({}) => {
     const dispatch = useDispatch();
     const { action } = useSelector((state: RootState) => state.action);
+    const [userInfo, setUserInfo] = useState<any>({});
     const [minutes, setMinutes] = useState(0);
     const [seconds, setSeconds] = useState(0);
     const [isReady, setReady] = useState(false);
@@ -30,7 +32,7 @@ const BuddyTimer: FC<iTimerProps> = ({}) => {
     };
 
     const onEndTimer = () => {
-
+        // TODO:: 해당 타이머 종료 시,
     };
 
 
@@ -39,18 +41,59 @@ const BuddyTimer: FC<iTimerProps> = ({}) => {
         dispatch(clearAction());
     };
 
+    // FUNC:: MOUNTED
     useEffect(() => {
+        const fetchUserInfo = async () => {
+            try {
+                const userId = localStorage.getItem("userId");
+                if (!userId) return; // userId가 없으면 실행하지 않음
+
+                const user = await dexieDB.user.get(Number(userId));
+                if (user) {
+                    setUserInfo(user);
+                } else {
+                    console.warn("User not found in DB");
+                }
+            } catch (error) {
+                console.error("Error fetching user info:", error);
+            }
+        };
+
+        fetchUserInfo();
+    }, []);
+
+
+    useEffect(() => {
+        console.log(111)
         setReady(false);
         const matchingAction = combined.find(({ key }) => key === eAction[action]);
         if (matchingAction && matchingAction.time) {
             const { tempMinutes, tempSeconds } = convertMillisecondsToMinutesAndSeconds(matchingAction.time);
             setMinutes(tempMinutes);
             setSeconds(tempSeconds);
-            setTimeout(() => {
-                setReady(true)
 
-            })
+            const isActionOngoing = async() => {
+                return dexieDB.action.where("userId").equals(+userInfo?.userId).toArray();
+            }
+
+            console.log("HELLOWLLD", isActionOngoing())
+
+
+            const currentTime = new Date(); // 현재 시간
+            const futureTime = new Date(currentTime.getTime() + matchingAction.time);
+            const payload = {
+                createBy: +userInfo?.userId || +localStorage.getItem("userId"),
+                isCurrent: true,
+                isDone: false,
+                startTime: currentTime.toString(),
+                endTime: futureTime.toString()
+            }
+            dexieDB.action.add(payload);
+
+            setReady(true)
         }
+
+        return () => {}
     }, [action]);
 
 
