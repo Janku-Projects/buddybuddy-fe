@@ -72,23 +72,37 @@ const BuddyTimer: FC<iTimerProps> = ({}) => {
             setMinutes(tempMinutes);
             setSeconds(tempSeconds);
 
-            const isActionOngoing = async() => {
-                return dexieDB.action.where("userId").equals(+userInfo?.userId).toArray();
-            }
+            const isActionOngoing = async () => {
+                // DESC::
+                // 1. Action DB 에 isOngoing 하는 data 파악 > 있을 경우, 기존 종료
+                // 2. 새로운 Action DB에 isOngoing으로 삽입
+                // 3.
 
-            console.log("HELLOWLLD", isActionOngoing())
+                const actions = await dexieDB.action
+                    .where("userId").equals(+userInfo?.userId)  // Convert to number if necessary
+                    .and(action => action.isCurrent === true)   // Filter isCurrent === true
+                    .toArray();
+
+                if (actions.length > 0) {
+                    for (const action of actions) {
+                        await dexieDB.action.update(action.actionId, { isCurrent: false });
+                    }
+                }
+                const currentTime = new Date(); // 현재 시간
+                const futureTime = new Date(currentTime.getTime() + matchingAction.time);
+                const payload = {
+                    isCurrent: true,
+                    isDone: false,
+                    startTime: currentTime.toString(),
+                    endTime: futureTime.toString(),
+                    userId: +userInfo?.userId || +localStorage.getItem("userId"),
+                }
+                dexieDB.action.add(payload);
+            };
+            isActionOngoing();
 
 
-            const currentTime = new Date(); // 현재 시간
-            const futureTime = new Date(currentTime.getTime() + matchingAction.time);
-            const payload = {
-                createBy: +userInfo?.userId || +localStorage.getItem("userId"),
-                isCurrent: true,
-                isDone: false,
-                startTime: currentTime.toString(),
-                endTime: futureTime.toString()
-            }
-            dexieDB.action.add(payload);
+
 
             setReady(true)
         }
