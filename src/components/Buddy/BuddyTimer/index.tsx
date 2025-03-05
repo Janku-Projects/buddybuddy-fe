@@ -83,6 +83,16 @@ const BuddyTimer: FC<iTimerProps> = ({}) => {
                     .and(action => action.isCurrent === true)   // Filter isCurrent === true
                     .toArray();
 
+                // userInfo?.userId 값이 undefined 또는 null인 경우
+                //
+                // .equals(undefined) 또는 .equals(null)을 실행하면 IndexedDB에서 유효한 키가 아니므로 오류 발생.
+                // userId의 데이터 타입이 IndexedDB에서 지원하지 않는 타입인 경우
+                //
+                // IndexedDB는 number, string, Date, Array만 키로 사용할 수 있습니다.
+                // userId가 Object나 undefined, null이면 where("userId").equals(...)에서 오류 발생.
+                // Dexie 테이블에서 userId가 인덱싱되지 않은 경우
+                // userId가 인덱스(stores())에 등록되지 않으면 .where("userId")를 사용할 수 없음.
+
                 if (actions.length > 0) {
                     for (const action of actions) {
                         await dexieDB.action.update(action.actionId, { isCurrent: false });
@@ -100,9 +110,6 @@ const BuddyTimer: FC<iTimerProps> = ({}) => {
                 dexieDB.action.add(payload);
             };
             isActionOngoing();
-
-
-
 
             setReady(true)
         }
