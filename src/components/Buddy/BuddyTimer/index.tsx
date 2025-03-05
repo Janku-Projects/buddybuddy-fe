@@ -64,7 +64,9 @@ const BuddyTimer: FC<iTimerProps> = ({}) => {
 
 
     useEffect(() => {
-        console.log(111)
+        if(!userInfo?.userId || +localStorage.getItem("userId")) return;
+
+
         setReady(false);
         const matchingAction = combined.find(({ key }) => key === eAction[action]);
         if (matchingAction && matchingAction.time) {
@@ -107,6 +109,7 @@ const BuddyTimer: FC<iTimerProps> = ({}) => {
                     endTime: futureTime.toString(),
                     userId: +userInfo?.userId || +localStorage.getItem("userId"),
                 }
+
                 dexieDB.action.add(payload);
             };
             isActionOngoing();

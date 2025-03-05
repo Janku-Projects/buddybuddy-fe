@@ -8,7 +8,7 @@ class DexieDB extends Dexie {
 
     constructor() {
         super("dexieDB");
-        this.version(2).stores({
+        this.version(1).stores({
             user: "++userId, name",
             buddy: "++buddyId, name",
             action: "++actionId, userId, isCurrent",

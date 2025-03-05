@@ -18,13 +18,13 @@ export interface Buddy {
 
 
 export interface Action {
-    actionId?: number ; // PK
-    isCurrent ?: boolean; // 현재 진행중인지 플래그
+    isCurrent: boolean; // 현재 진행중인지 플래그
     isDone ?: boolean; // 완료 플래그
     startTime: string; // 시작 시간
     endTime: string; // 종료 시간
+    userId: number ; // 만든 사람 (userId)
 
-    userId?: number ; // 만든 사람 (userId)
+    actionId?: number ; // PK
 }
 
 
