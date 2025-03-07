@@ -76,9 +76,7 @@ const BuddyTimer: FC<iTimerProps> = ({}) => {
 
             const isActionOngoing = async () => {
                 // DESC::
-                // 1. Action DB 에 isOngoing 하는 data 파악 > 있을 경우, 기존 종료
-                // 2. 새로운 Action DB에 isOngoing으로 삽입
-                // 3.
+
 
                 const actions = await dexieDB.action
                     .where("userId").equals(+userInfo?.userId)  // Convert to number if necessary
@@ -110,7 +108,7 @@ const BuddyTimer: FC<iTimerProps> = ({}) => {
                     userId: +userInfo?.userId || +localStorage.getItem("userId"),
                 }
 
-                dexieDB.action.add(payload);
+                // dexieDB.action.add(payload);
             };
             isActionOngoing();
 

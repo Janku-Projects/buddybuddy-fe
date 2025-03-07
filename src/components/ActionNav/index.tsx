@@ -9,29 +9,18 @@ import { RootState } from "@/store/store";
 
 interface iActionNavProps extends generalInterface {
     actionList: any[];
+    onClick: (payload) => void;
 }
 
-export const ActionNav: FC<iActionNavProps> = ({ actionList }) => {
+export const ActionNav: FC<iActionNavProps> = ({ actionList, onClick }) => {
     const dispatch = useDispatch();
     const { action } = useSelector((state: RootState) => state.action);
 
 
     const onClickAction = (payload) => {
         console.log("action:: ", action)
-        // TODO:: []로 나누기
 
-        if (payload.gain) {
-            const { key, value } = payload.gain;
-            dispatch(setGainBuddyInfo({ [key]: value }));
-        }
-
-        if (payload.minus) {
-            const { key, value } = payload.minus;
-            dispatch(setGainBuddyInfo({ [key]: value }));
-        }
-
-        // TODO::
-        payload.handlerAction();
+        onClick(payload);
     };
 
 
