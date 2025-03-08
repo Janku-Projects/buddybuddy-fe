@@ -19,6 +19,8 @@ const Home = () => {
     const [userInfo, setUserInfo] = useState<any>({});
 
     const handleAction = async (payload) => {
+        const userId = localStorage.getItem("userId");
+        if (!userId) return; // userId가 없으면 실행하지 않음
         const user = await dexieDB.user.get(Number(userId));
         if (user) {
             setUserInfo(user);
@@ -45,10 +47,9 @@ const Home = () => {
             // 진행중인 액션이 있는 경우
             await dexieDB.action.update(onGoingAction.actionId, {isCurrent: false});
         }
-        const matchingAction = combined.find(({ key }) => key === eAction[action]);
 
         const currentTime = new Date(); // 현재 시간
-        const futureTime = new Date(currentTime.getTime() + matchingAction.time);
+        const futureTime = new Date(currentTime.getTime() + payload.time);
         const params  = {
             isCurrent: true,
             isDone: false,
