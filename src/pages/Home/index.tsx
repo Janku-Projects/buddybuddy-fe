@@ -8,6 +8,7 @@ import { setGainBuddyInfo } from "@/store/slices/buddySlice";
 import { useDispatch } from "react-redux";
 import { eAction } from "@/store/slices/actionSlice";
 import { useState } from "react";
+import { enqueueSnackbar } from "notistack";
 
 const a = TopActionLabel(null).map(({ key, time }) => ({ key, time: time || 0 }));
 const b = BottomActionLabel(null).map(({ key, time }) => ({ key, time: time || 0 }));
@@ -42,12 +43,15 @@ const Home = () => {
         payload.handlerAction();
 
 
-        const onGoingAction = await dexieDB.action.get("isCurrent");
-        if(!!onGoingAction) {
-            // 진행중인 액션이 있는 경우
-            await dexieDB.action.update(onGoingAction.actionId, {isCurrent: false});
-        }
+        // const onGoingAction = await dexieDB.action.where("isCurrent").equals(true);
+        const onGoingAction = await dexieDB.action.filter(action => action.isCurrent === true).toArray();
 
+        if(onGoingAction.length > 0) {
+            // 진행중인 액션이 있는 경우
+            enqueueSnackbar('현재 진행중인 액션이 있습니다.', {variant: "warning"});
+            await dexieDB.action.update(onGoingAction[0]?.actionId, {isCurrent: false});
+            return false;
+        }
         const currentTime = new Date(); // 현재 시간
         const futureTime = new Date(currentTime.getTime() + payload.time);
         const params  = {
@@ -57,7 +61,7 @@ const Home = () => {
             endTime: futureTime.toString(),
             userId: +userInfo?.userId || +localStorage.getItem("userId"),
         }
-        await dexieDB.action.add(payload);
+        await dexieDB.action.add(params);
 
     }
 

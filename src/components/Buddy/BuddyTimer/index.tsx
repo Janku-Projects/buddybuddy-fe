@@ -43,6 +43,8 @@ const BuddyTimer: FC<iTimerProps> = ({}) => {
 
     // FUNC:: MOUNTED
     useEffect(() => {
+        console.log("timer load")
+
         const fetchUserInfo = async () => {
             try {
                 const userId = localStorage.getItem("userId");
@@ -59,25 +61,36 @@ const BuddyTimer: FC<iTimerProps> = ({}) => {
             }
         };
 
+        const fetchActionInfo = async () => {
+            const onGoingAction = await dexieDB.action.filter(action => action.isCurrent === true).toArray();
+            if(onGoingAction.length > 0){
+                // 진행중인 액션이 있는 경우 > 남은 시간 표시
+                const { endTime} = onGoingAction[0];
+                const timeLeft = new Date(endTime).getTime() - new Date(new Date()).getTime();
+                const { tempMinutes, tempSeconds } = convertMillisecondsToMinutesAndSeconds(timeLeft);
+                setMinutes(tempMinutes);
+                setSeconds(tempSeconds);
+                setReady(true)
+            }
+        }
+
         fetchUserInfo();
+        fetchActionInfo();
     }, []);
 
 
     useEffect(() => {
-        if(!userInfo?.userId || +localStorage.getItem("userId")) return;
 
-
+        if(!userInfo?.userId || !+localStorage.getItem("userId")) return;
         setReady(false);
+
         const matchingAction = combined.find(({ key }) => key === eAction[action]);
         if (matchingAction && matchingAction.time) {
             const { tempMinutes, tempSeconds } = convertMillisecondsToMinutesAndSeconds(matchingAction.time);
             setMinutes(tempMinutes);
             setSeconds(tempSeconds);
-
-
             setReady(true)
         }
-
         return () => {}
     }, [action]);
 
