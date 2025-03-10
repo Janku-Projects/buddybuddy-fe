@@ -45,6 +45,7 @@ const BuddyTimer: FC<iTimerProps> = ({}) => {
     useEffect(() => {
         console.log("timer load")
 
+        // FUNC:: USER 찾기
         const fetchUserInfo = async () => {
             try {
                 const userId = localStorage.getItem("userId");
@@ -61,6 +62,7 @@ const BuddyTimer: FC<iTimerProps> = ({}) => {
             }
         };
 
+        // FUNC:: 진행중인 ACTION 찾기
         const fetchActionInfo = async () => {
             const onGoingAction = await dexieDB.action.filter(action => action.isCurrent === true).toArray();
             if(onGoingAction.length > 0){
