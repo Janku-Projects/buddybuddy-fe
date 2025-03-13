@@ -48,7 +48,7 @@ const Home = () => {
 
         if(onGoingAction.length > 0) {
             // 진행중인 액션이 있는 경우
-            enqueueSnackbar('현재 진행중인 액션이 있습니다.', {variant: "warning"});
+            enqueueSnackbar('현재 진행중인 액션을 종료합니다.', {variant: "warning"});
             await dexieDB.action.update(onGoingAction[0]?.actionId, {isCurrent: false});
             return false;
         }
