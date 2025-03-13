@@ -4,6 +4,7 @@ import buddySlice from "@/store/slices/buddySlice";
 import uiSlice from "@/store/slices/uiSlice";
 import actionSlice from "@/store/slices/actionSlice";
 import modelSlice from "@/store/slices/modelSlice";
+import modalSlice from "@/store/slices/modalSlice";
 
 
 const rootReducer = combineReducers({
@@ -11,7 +12,8 @@ const rootReducer = combineReducers({
     buddy: buddySlice,
     ui: uiSlice,
     action: actionSlice,
-    model: modelSlice
+    model: modelSlice,
+    modal: modalSlice
 });
 
 export default rootReducer;
