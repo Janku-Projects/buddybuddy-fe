@@ -16,10 +16,12 @@ export enum eAction {
 
 interface iActionSlice {
     action: number;
+    actionFlag: Boolean;
 }
 
 const initState: iActionSlice = {
-    action: 0
+    action: 0,
+    actionFlag: false
 };
 
 const actionSlice = createSlice({
@@ -28,10 +30,12 @@ const actionSlice = createSlice({
     reducers: {
         setAction: (state, action: PayloadAction<eAction | string>) => {
             state.action = +eAction[action.payload];
+            state.actionFlag = true;
         },
         clearAction: (state) => {
             console.log("clear");
             state.action = +eAction.WAIT;
+            state.actionFlag = false;
         }
     }
 });

@@ -52,7 +52,6 @@ const HomeHandler = () => {
 
     const actionHandler = (params) => {
         console.log("current action : ", action);
-        console.log("change action : ", params);
         if(params === "CALL"){
             // dispatch(setModel({ fov: 10 }));
         } else {

@@ -83,6 +83,8 @@ const Modal = ({ type, closeText = "닫기", confirmText, confirmColor, handleCo
   const handleClose = () => {
     dispatch(modalActions.closeModal());
   };
+
+
   return (
     <ModalOverlay>
       <ModalContainer>

@@ -18,7 +18,7 @@ const combined = [...a, ...b];
 
 const BuddyTimer: FC<iTimerProps> = ({}) => {
     const dispatch = useDispatch();
-    const { action } = useSelector((state: RootState) => state.action);
+    const { action, actionFlag } = useSelector((state: RootState) => state.action);
     const [userInfo, setUserInfo] = useState<any>({});
     const [minutes, setMinutes] = useState(0);
     const [seconds, setSeconds] = useState(0);
@@ -36,15 +36,15 @@ const BuddyTimer: FC<iTimerProps> = ({}) => {
     };
 
 
-    const handleCancelAction = () => {
-        console.log("onClick:: ");
+    const handleCancelAction = async () => {
+        setReady(false);
         dispatch(clearAction());
+        const onGoingAction = await dexieDB.action.filter(action => action.isCurrent === true).toArray();
+        if(onGoingAction.length > 0) await dexieDB.action.update(onGoingAction[0]?.actionId, { isCurrent: false });
     };
 
     // FUNC:: MOUNTED
     useEffect(() => {
-        console.log("timer load")
-
         // FUNC:: USER 찾기
         const fetchUserInfo = async () => {
             try {
@@ -54,14 +54,11 @@ const BuddyTimer: FC<iTimerProps> = ({}) => {
                 const user = await dexieDB.user.get(Number(userId));
                 if (user) {
                     setUserInfo(user);
-                } else {
-                    console.warn("User not found in DB");
                 }
             } catch (error) {
                 console.error("Error fetching user info:", error);
             }
         };
-
         // FUNC:: 진행중인 ACTION 찾기
         const fetchActionInfo = async () => {
             const onGoingAction = await dexieDB.action.filter(action => action.isCurrent === true).toArray();
@@ -75,25 +72,20 @@ const BuddyTimer: FC<iTimerProps> = ({}) => {
                 setReady(true)
             }
         }
-
         fetchUserInfo();
         fetchActionInfo();
     }, []);
 
-
     useEffect(() => {
-
-        if(!userInfo?.userId || !+localStorage.getItem("userId")) return;
-        setReady(false);
-
-        const matchingAction = combined.find(({ key }) => key === eAction[action]);
+        if(!actionFlag) return;
+        if (!(userInfo?.userId || +localStorage.getItem("userId"))) return; //
+        const matchingAction = combined.find(({ key }) => key === eAction[action]); // TODO: CommonFunc exclude
         if (matchingAction && matchingAction.time) {
             const { tempMinutes, tempSeconds } = convertMillisecondsToMinutesAndSeconds(matchingAction.time);
             setMinutes(tempMinutes);
             setSeconds(tempSeconds);
-            setReady(true)
+            setReady(true);
         }
-        return () => {}
     }, [action]);
 
 

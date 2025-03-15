@@ -1,5 +1,18 @@
 import { Call, Cure, Exercise, Shower, Sleep, Status } from "@/components/Common/Icon/Icons.def";
 
+
+enum eActionProcess {
+    EAT,
+    SLEEP,
+    PLAY,
+    CURE,
+    SHOWER,
+    STATUS,
+    CHAT,
+    CALL
+}
+
+
 export const TopActionLabel = (handlerAction)  => [
     {
         key: "EAT",
